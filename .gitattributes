@@ -1,3 +1,8 @@
-* text eol=lf
+* text=auto
+
+*.cs text
+*.sln text
+*.resx text
 
 *.bin binary
+bankc binary

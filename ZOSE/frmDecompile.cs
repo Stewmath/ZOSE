@@ -9,17 +9,17 @@ using System.Windows.Forms;
 
 namespace ZOSE
 {
-	public partial class frmDecompile : Form
-	{
-		public frmDecompile()
-		{
-			InitializeComponent();
-		}
+    public partial class frmDecompile : Form
+    {
+        public frmDecompile()
+        {
+            InitializeComponent();
+        }
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			this.DialogResult = DialogResult.OK;
-			this.Close();
-		}
-	}
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+    }
 }

@@ -9,22 +9,22 @@ using System.Windows.Forms;
 
 namespace ZOSE
 {
-	public partial class frmDecompileInteraction : Form
-	{
-		public frmDecompileInteraction()
-		{
-			InitializeComponent();
-		}
+    public partial class frmDecompileInteraction : Form
+    {
+        public frmDecompileInteraction()
+        {
+            InitializeComponent();
+        }
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			this.DialogResult = DialogResult.OK;
-			this.Close();
-		}
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
 
-		private void frmDecompile_Load(object sender, EventArgs e)
-		{
+        private void frmDecompile_Load(object sender, EventArgs e)
+        {
 
-		}
-	}
+        }
+    }
 }
