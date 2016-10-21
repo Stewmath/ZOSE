@@ -1,0 +1,7 @@
+*.exe
+*.sue
+*.userprefs
+*.user
+bin/
+obj/
+*.suo
