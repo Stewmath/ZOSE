@@ -20,8 +20,9 @@ namespace ZOSE
         string scriptFilename = "";
         bool[] safeAddresses;
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern int GetScrollPos(IntPtr hWnd, int nBar);
+        // Using this breaks compatibility with mono
+        //[System.Runtime.InteropServices.DllImport("user32.dll")]
+        //public static extern int GetScrollPos(IntPtr hWnd, int nBar);
 
         public Form1(string filename)
         {
@@ -99,7 +100,7 @@ namespace ZOSE
             int loc = gb.ReadByte() + gb.ReadByte() * 0x100;
             if (loc == 0)
                 loc = WriteASMScript();*/
-            if (gb.ReadByte(0x20) == 0)
+            if (gb.ReadByte(0x3c6f) != 0x09)
             {
                 if (MessageBox.Show("Warning: ZOSE applies a patch to use interaction 72 which allows us\nto create scripts anywhere we want with ease. However, you\nwill not be able to use the Great Moblin event anymore. Continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No)
                     return;
@@ -182,33 +183,39 @@ namespace ZOSE
 
         public void WriteASMScript()
         {
-            if (MessageBox.Show("Warning! Bank C will be replaced by all the default data!\nYour old script pointers will be erased and you'll have to re-compile your script!\nAre you sure you want to continue (Highly recommended to better engine)?", "Warning", MessageBoxButtons.YesNo) != DialogResult.No)
-            {
-                this.gb.WriteBytes(0x30000, ZOSE.Properties.Resources.bankc);
-                this.gb.WriteBytes(0x20, new byte[0x1a]);
-                this.gb.WriteBytes(0x2be09, new byte[] { 
-                30, 70, 0x1a, 0xfe, 0, 0x20, 0x24, 30, 0x42, 0x21, 0, 0x40, 0x1a, 6, 0, 0x4f, 
-                9, 9, 9, 30, 0x44, 0x1a, 0xfe, 0, 0x20, 15, 60, 30, 0x44, 0x12, 0xe5, 0xcd, 
-                0x80, 0x26, 0x21, 0, 0xc3, 0xcd, 0x44, 0x25, 0xe1, 0xc3, 0xbc, 0x3f, 0x3d, 0x12, 0xc9
-             });
-                this.gb.WriteByte(0x3c6f, 9);
-                this.gb.WriteByte(0x3c70, 0x7e);
-                this.gb.WriteBytes(0x3fbc, new byte[] { 
-                30, 0x7d, 0x1a, 0xfe, 0, 40, 7, 0x7a, 0x67, 0x7b, 0x6f, 0x1a, 0x18, 4, 0x3e, 0xff, 
-                0xe0, 0x97, 0xea, 0x22, 0x22, 0x2a, 0x47, 0x2a, 0x66, 0x6f, 120, 0xe0, 0x97, 0xea, 0x22, 0x22, 
-                0xd5, 0x11, 0, 0xc3, 0x2a, 0x12, 0x13, 0x7a, 0xfe, 0xc4, 0x20, 0xf8, 0xd1, 30, 0x58, 0x1a, 
-                0x6f, 0x1c, 0x1a, 0x67, 0xcd, 0x18, 0x25, 0x38, 5, 0xcd, 0x88, 0x25, 0xaf, 0xc9, 0xcd, 0x88, 
-                0x25, 0x37, 0xc9
-             });
-                this.gb.WriteBytes(0x30103, new byte[] { 0x2d, 0x3f });
-                this.gb.WriteBytes(0x3f2d, new byte[] { 0xe1, 0x23, 0x2a, 0xe5, 0x21, 0xf3, 0x7f, 0xdf, 0x2a, 0x66, 0x6f, 0xe9 });
-                this.gb.WriteBytes(0x3f39, new byte[] { 0x21, 0, 0xc3, 0xe5, 0xcd, 0x44, 0x25, 0xe1, 0xc9, 0xbc, 0x3f });
-                this.PatchOtherOpcodes(false);
-                BinaryWriter writer = new BinaryWriter(File.Open(this.filename, FileMode.Open));
-                writer.Write(this.gb.Buffer);
-                writer.Close();
-            }
+            this.gb.WriteBytes(0x30000, ZOSE.Properties.Resources.bankc);
+            this.gb.WriteBytes(0x20, new byte[0x1a]);
+            this.gb.WriteBytes(0x2be09, new byte[] {
+                    30, 70, 0x1a, 0xfe, 0, 0x20, 0x24, 30, 0x42, 0x21, 0, 0x40, 0x1a, 6, 0, 0x4f,
+                    9, 9, 9, 30, 0x44, 0x1a, 0xfe, 0, 0x20, 15, 60, 30, 0x44, 0x12, 0xe5, 0xcd,
+                    0x80, 0x26, 0x21, 0, 0xc3, 0xcd, 0x44, 0x25, 0xe1, 0xc3, 0xbc, 0x3f, 0x3d, 0x12, 0xc9
+                    });
+            this.gb.WriteByte(0x3c6f, 9);
+            this.gb.WriteByte(0x3c70, 0x7e);
+            this.gb.WriteBytes(0x3fbc, new byte[] {
+                    30, 0x7d, 0x1a, 0xfe, 0, 40, 7, 0x7a, 0x67, 0x7b, 0x6f, 0x1a, 0x18, 4, 0x3e, 0xff,
+                    0xe0, 0x97, 0xea, 0x22, 0x22, 0x2a, 0x47, 0x2a, 0x66, 0x6f, 120, 0xe0, 0x97, 0xea, 0x22, 0x22,
+                    0xd5, 0x11, 0, 0xc3, 0x2a, 0x12, 0x13, 0x7a, 0xfe, 0xc4, 0x20, 0xf8, 0xd1, 30, 0x58, 0x1a,
+                    0x6f, 0x1c, 0x1a, 0x67, 0xcd, 0x18, 0x25, 0x38, 5, 0xcd, 0x88, 0x25, 0xaf, 0xc9, 0xcd,0x88,
+                    0x25, 0x37, 0xc9
+                    });
+            this.gb.WriteBytes(0x30103, new byte[] { 0x2d, 0x3f });
+            this.gb.WriteBytes(0x3f2d, new byte[] { 0xe1, 0x23, 0x2a, 0xe5, 0x21, 0xf3, 0x7f, 0xdf, 0x2a, 0x66, 0x6f, 0xe9 });
+            this.gb.WriteBytes(0x3f39, new byte[] { 0x21, 0, 0xc3, 0xe5, 0xcd, 0x44, 0x25, 0xe1, 0xc9, 0xbc, 0x3f });
 
+            // Overwrite parts patched in older zose versions
+            this.gb.WriteBytes(0x251b, new byte[] { 0x3e,0x0c,0xe0,0x97,0xea,0x22,0x22,0x7e,0xb7,0x28 });
+
+            // Could uncomment these to reclaim free space which older versions of zose used, but it
+            // feels safer not to
+            //this.gb.WriteBytes(0x3f44, new byte[0x20]);
+            //this.gb.WriteBytes(0x3fb1, new byte[0x0b]);
+            //this.gb.WriteBytes(0x2be38, new byte[0x10]);
+
+            this.PatchOtherOpcodes(false);
+            BinaryWriter writer = new BinaryWriter(File.Open(this.filename, FileMode.Open));
+            writer.Write(this.gb.Buffer);
+            writer.Close();
         }
 
         public void PatchOtherOpcodes(bool write)
@@ -492,8 +499,11 @@ namespace ZOSE
                 }
                 y = line * 16;
                 y += 16;
-                y -= GetScrollPos(textBox1.Handle, 1) * 16;
-                x -= GetScrollPos(textBox1.Handle, 0);
+
+                // Using GetScrollPos from user32.dll breaks compatibility with mono
+                //y -= GetScrollPos(textBox1.Handle, 1) * 16;
+                //x -= GetScrollPos(textBox1.Handle, 0);
+
                 foreach (string s in Compiler.commands)
                 {
                     if (checkFull && s == command)
@@ -572,6 +582,7 @@ namespace ZOSE
             if (compiler == null)
                 return;
 
+            WriteASMScript();
         }
 
         private void applyNewOpcodesToolStripMenuItem_Click(object sender, EventArgs e)
