@@ -118,9 +118,10 @@ namespace ZOSE
         {
             if (compiler == null)
                 return;
-            if (!compiler.Compile(textBox1.Text))
+            int retval;
+            if ((retval = compiler.Compile(textBox1.Text)) != 0)
             {
-                MessageBox.Show("Error compiling.", "Error");
+                MessageBox.Show("Error compiling on line " + retval + ".", "Error");
                 return;
             }
             foreach (GBScript s in compiler.scripts)

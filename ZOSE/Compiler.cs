@@ -27,53 +27,132 @@ namespace ZOSE
         public static string[] commands = new string[]
         {
             "writelocation",
+            "forceend",
             "maketorcheslightable",
             "createpuffnodelay",
+            "jumptilecheck",
+            "checktile",
             "setinteraction72",
             "jump3byte",
             "jumproomflag",
+            "jump3bytemc",
+            "jumproomflago",
+            "unsetroomflag",
             "jump2byte",
-            "checkitemflag",
-            "setvisible",
+            "setstate",
             "set45",
-            "load100",
+            "setstate2",
+            "loadscript",
             "spawncommon",
+            "spawninteraction",
             "spawnenemy",
             "showpasswordscreen",
             "loadrel",
+            "jumptable_memoryaddress",
             "setcoords",
             "set49",
+            "setmovingdirection",
+            "turntofacelink",
+            "setspeed",
+            "checkcounter2iszero",
             "load6667",
-            "loadsprite",
+            "setcollisionradii",
             "setinteractionfactor",
+            "writeinteractionbyte",
+            "loadsprite",
+            "setanimation",
             "checklinkxtoma",
+            "cplinkx",
             "setmemory",
+            "writememory",
             "ormemory",
+            "getrandombits",
             "addsetinteractionfactor",
+            "addinteractionbyte",
+            "setzspeed",
             "set49extra",
+            "setmovingdirectionandanimation",
             "settextidjp",
+            "rungenericnpc",
+            "rungenericnpclowindex",
             "showtext",
+            "showtextlowindex",
             "checktext",
+            "showtextnonexitable",
+            "showtextnonexitablelowindex",
+            "makeabuttonsensitive",
             "settextid",
             "showloadedtext",
             "checkabutton",
-            "checkroomflag",
+            "showtextdifferentforlinked",
+            "checkcfc0bit",
+            "xorcfc0bit",
+            "jumpifroomflagset",
             "setroomflag",
+            "orroomflag",
+            "jumpifc6xxset",
+            "writec6xx",
+            "jumpifglobalflagset",
             "setglobalflag",
+            "unsetglobalflag",
+            "setdisabledobjectsto91",
+            "setdisabledobjectsto00",
+            "setdisabledobjectsto11",
+            "disablemenu",
+            "enablemenu",
             "disableinput",
             "enableinput",
             "callscript",
+            "retscript",
+            "jumpiftextoptioneq",
+            "jumpalways",
+            "jumptable_interactionbyte",
+            "jumpifmemoryset",
+            "jumpiftradeitemeq",
+            "jumpifnoenemies",
+            "jumpiflinkvariableneq",
+            "jumpifmemoryeq",
+            "jumpifinteractionbyteeq",
+            "checkitemflag",
+            "checkroomflag40",
             "checkspecialflag",
+            "checkroomflag80",
+            "checkcollidedwithlink_onground",
+            "checkpalettefadedone",
             "checkenemycount",
+            "checknoenemies",
             "checkmemorybit",
+            "checkflagset",
+            "checkinteractionbyteeq",
             "checkmemory",
+            "checkmemoryeq",
+            "checknotcollidedwithlink_ignorez",
+            "setcounter1",
+            "checkheartdisplayupdated",
+            "checkrupeedisplayupdated",
+            "checkcollidedwithlink_ignorez",
             "spawnitem",
+            "giveitem",
+            "jumpifitemobtained",
             "asm15",
             "createpuff",
             "playsound",
             "setmusic",
+            "setcc8a",
+            "setdisabledobjects",
+            "spawnenemyhere",
+            "settilepos",
+            "settileat",
             "settile",
+            "settilehere",
+            "updatelinkrespawnposition",
             "shakescreen",
+            "initcollisions",
+            "movenpcup",
+            "movenpcright",
+            "movenpcdown",
+            "movenpcleft",
+            "setdelay0",
             "setdelay1",
             "setdelay2",
             "setdelay3",
@@ -86,17 +165,6 @@ namespace ZOSE
             "setdelay10",
             "setdelay11",
             "setdelay12",
-            "setdelay0",
-            "jump3bytemc",
-            "jumproomflago",
-            "giveitem",
-            "jumptilecheck",
-            "checktile",
-            "forceend",
-            "settilepos",
-            "setcc8a",
-            "spawnenemyhere",
-            "unsetroomflag"
         };
 
         public GBHL.GBFile output
@@ -110,21 +178,23 @@ namespace ZOSE
             gb = g;
         }
 
-        public bool Compile(string text)
+        public int Compile(string text)
         {
             scripts = new GBScript[1024];
             scripts[0] = new GBScript(1024);
             currentWriteIndex = -1;
             jumps = new List<int>();
             if (text == "")
-                return true;
+                return 0;
             string[] lines = text.Replace("\r", "").Split('\n');
+            int lineCount=0;
             foreach (string s in lines)
             {
+                lineCount++;
                 if (!CompileLine(s))
-                    return false;
+                    return lineCount;
             }
-            return true;
+            return 0;
         }
 
         public bool CompileLine(string line)
@@ -297,18 +367,10 @@ namespace ZOSE
                     output.WriteByte((byte)k);
                     break;
 
-                //So this wasn't what I wanted. It deals with tile setting in a different way.
-                /*case "setinstant":
-                    output.WriteByte(0x91);
-                    output.WriteByte(0xE0);
-                    output.WriteByte(0xCC);
-                    output.WriteByte(0x01);
-                    break;*/
-
                 //Final
 
                 case "jump2byte": //01-7F
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     output.WriteByte((byte)(i >> 8));
@@ -316,12 +378,9 @@ namespace ZOSE
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
-                case "checkitemflag": //CD
-                    output.WriteByte(0xCD);
-                    break;
-
-                case "setvisible": //80
-                    if (args.Length < 2)
+                    // Formerly "setvisible"
+                case "setstate": //80
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -330,8 +389,9 @@ namespace ZOSE
                     output.WriteByte((byte)i);
                     break;
 
-                case "set45": //81
-                    if (args.Length < 2)
+                case "set45": // 81
+                case "setstate2":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -342,22 +402,22 @@ namespace ZOSE
 
                 //no 82
 
-                case "load100": //83
-                    if (args.Length < 4)
+                case "loadscript": //83
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
-                    k = ParseHex(args[3]);
-                    if (i == -1 || j == -1 || k == -1)
+                    if (i == -1 || j == -1)
                         return false;
                     output.WriteByte(0x83);
-                    output.WriteByte((byte)i);
+                    output.WriteWord((ushort)i);
                     output.WriteByte((byte)j);
-                    output.WriteByte((byte)k);
+                    scripts[currentWriteIndex].endwith0 = false;
                     break;
 
                 case "spawncommon": //84
-                    if (args.Length < 5)
+                case "spawninteraction":
+                    if (args.Length != 5)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -373,7 +433,7 @@ namespace ZOSE
                     break;
 
                 case "spawnenemy": //85
-                    if (args.Length < 5)
+                    if (args.Length != 5)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -389,7 +449,7 @@ namespace ZOSE
                     break;
 
                 case "showpasswordscreen": //86
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -399,19 +459,18 @@ namespace ZOSE
                     break;
 
                 case "loadrel": //87
-                    if (args.Length < 3)
+                case "jumptable_memoryaddress":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
-                    j = ParseHex(args[2]);
-                    if (i == -1 || j == -1)
+                    if (i == -1)
                         return false;
                     output.WriteByte(0x87);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
+                    output.WriteWord((ushort)i);
                     break;
 
                 case "setcoords": //88
-                    if (args.Length < 3)
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -423,7 +482,8 @@ namespace ZOSE
                     break;
 
                 case "set49": //89
-                    if (args.Length < 2)
+                case "setmovingdirection":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -432,8 +492,40 @@ namespace ZOSE
                     output.WriteByte((byte)i);
                     break;
 
+                case "turntofacelink": // 8a
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0x8a);
+                    break;
+
+                case "setspeed": // 8b
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
+                        return false;
+                    output.WriteByte(0x8b);
+                    output.WriteByte((byte)i);
+                    break;
+
+                case "checkcounter2iszero": // 8c, d8
+                    if (args.Length == 1) {
+                        output.WriteByte(0x8c);
+                    }
+                    else if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0xd8);
+                        output.WriteByte((byte)i);
+                    }
+                    else
+                        return false;
+                    break;
+
                 case "load6667": //8D
-                    if (args.Length < 3)
+                case "setcollisionradii":
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -445,7 +537,8 @@ namespace ZOSE
                     break;
 
                 case "setinteractionfactor": //8E
-                    if (args.Length < 3)
+                case "writeinteractionbyte":
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -457,7 +550,8 @@ namespace ZOSE
                     break;
 
                 case "loadsprite": //8F
-                    if (args.Length < 2)
+                case "setanimation":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -467,7 +561,8 @@ namespace ZOSE
                     break;
 
                 case "checklinkxtoma": //90
-                    if (args.Length < 2)
+                case "cplinkx":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -477,7 +572,8 @@ namespace ZOSE
                     break;
 
                 case "setmemory": //91
-                    if (args.Length < 3)
+                case "writememory":
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     k = ParseHex(args[2]);
@@ -490,7 +586,7 @@ namespace ZOSE
                     break;
 
                 case "ormemory": //92
-                    if (args.Length < 3)
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     k = ParseHex(args[2]);
@@ -502,8 +598,21 @@ namespace ZOSE
                     output.WriteByte((byte)k);
                     break;
 
+                case "getrandombits": // 93
+                    if (args.Length != 3)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    if (i == -1 || j == -1)
+                        return false;
+                    output.WriteByte(0x93);
+                    output.WriteByte((byte)i);
+                    output.WriteByte((byte)j);
+                    break;
+
                 case "addsetinteractionfactor": //94
-                    if (args.Length < 3)
+                case "addinteractionbyte":
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -514,8 +623,19 @@ namespace ZOSE
                     output.WriteByte((byte)j); //xx
                     break;
 
+                case "setzspeed": // 95
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
+                        return false;
+                    output.WriteByte(0x95);
+                    output.WriteWord((ushort)i); //yy
+                    break;
+
                 case "set49extra": //96
-                    if (args.Length < 2)
+                case "setmovingdirectionandanimation":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -525,66 +645,196 @@ namespace ZOSE
                     break;
 
                 case "settextidjp": //97
-                    if (args.Length < 3)
+                case "rungenericnpc":
+                    if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0x97);
+                        output.WriteByte((byte)(i>>8));
+                        output.WriteByte((byte)(i&0xff));
+                    }
+                    else if (args.Length == 3) {
+                        i = ParseHex(args[1]);
+                        j = ParseHex(args[2]);
+                        if (i == -1 || j == -1)
+                            return false;
+                        output.WriteByte(0x97);
+                        output.WriteByte((byte)i); //yy
+                        output.WriteByte((byte)j); //xx
+                    }
+                    else
                         return false;
-                    i = ParseHex(args[1]);
-                    j = ParseHex(args[2]);
-                    if (i == -1 || j == -1)
-                        return false;
-                    output.WriteByte(0x97);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
-
-                case "showtext": //98
-                    if (args.Length < 3)
-                        return false;
-                    i = ParseHex(args[1]);
-                    j = ParseHex(args[2]);
-                    if (i == -1 || j == -1)
-                        return false;
-                    output.WriteByte(0x98);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
-                    break;
-
-                case "checktext": //99
-                    output.WriteByte(0x99);
-                    break;
-
-                case "settextid": //9C
-                    if (args.Length < 3)
-                        return false;
-                    i = ParseHex(args[1]);
-                    j = ParseHex(args[2]);
-                    if (i == -1 || j == -1)
-                        return false;
-                    output.WriteByte(0x9C);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
-                    break;
-
-                case "showloadedtext": //9D
-                    output.WriteByte(0x9D);
-                    break;
-
-                case "checkabutton": //9E
-                    output.WriteByte(0x9E);
-                    break;
-
-                case "checkroomflag": //B0
-                    if (args.Length < 2)
+                    
+                case "rungenericnpclowindex": // 97
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
+                    output.WriteByte(0x97);
+                    output.WriteWord((byte)i);
+                    scripts[currentWriteIndex].endwith0 = false;
+                    break;
+
+                case "showtext": //98
+                    if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0x98);
+                        output.WriteByte((byte)(i>>8));
+                        output.WriteByte((byte)(i&0xff));
+                    }
+                    else if (args.Length == 3) {
+                        i = ParseHex(args[1]);
+                        j = ParseHex(args[2]);
+                        if (i == -1 || j == -1)
+                            return false;
+                        output.WriteByte(0x98);
+                        output.WriteByte((byte)i); //yy
+                        output.WriteByte((byte)j); //xx
+                    }
+                    else
+                        return false;
+                    break;
+
+                case "showtextlowindex": // 98
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
+                        return false;
+                    output.WriteByte(0x98);
+                    output.WriteWord((byte)i);
+                    break;
+
+                case "checktext": //99
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0x99);
+                    break;
+
+                case "showtextnonexitable": //9a
+                    if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0x9a);
+                        output.WriteByte((byte)(i>>8));
+                        output.WriteByte((byte)(i&0xff));
+                    }
+                    else if (args.Length == 3) {
+                        i = ParseHex(args[1]);
+                        j = ParseHex(args[2]);
+                        if (i == -1 || j == -1)
+                            return false;
+                        output.WriteByte(0x9a);
+                        output.WriteByte((byte)i); //yy
+                        output.WriteByte((byte)j); //xx
+                    }
+                    else
+                        return false;
+                    break;
+
+                case "showtextnonexitablelowindex": // 9a
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
+                        return false;
+                    output.WriteByte(0x9a);
+                    output.WriteWord((byte)i);
+                    break;
+
+                case "makeabuttonsensitive": // 9b
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0x9b);
+                    break;
+
+                case "settextid": //9C
+                    if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0x9C);
+                        output.WriteWord((ushort)i); //yy
+                    }
+                    else if (args.Length == 3) {
+                        i = ParseHex(args[1]);
+                        j = ParseHex(args[2]);
+                        if (i == -1 || j == -1)
+                            return false;
+                        output.WriteByte(0x9C);
+                        output.WriteByte((byte)i); //yy
+                        output.WriteByte((byte)j); //xx
+                    }
+                    else
+                        return false;
+                    break;
+
+                case "showloadedtext": //9D
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0x9D);
+                    break;
+
+                case "checkabutton": //9E
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0x9E);
+                    break;
+
+                case "showtextdifferentforlinked": // 9F
+                    if (args.Length != 4)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    k = ParseHex(args[3]);
+                    if (i == -1 || j == -1 || k == -1)
+                        return false;
+                    output.WriteByte(0x9f);
+                    output.WriteByte((byte)i);
+                    output.WriteByte((byte)j);
+                    output.WriteByte((byte)k);
+                    break;
+
+                case "checkcfc0bit": // a0-a7
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1 || i >= 8)
+                        return false;
+                    output.WriteByte((byte)(0xa0 | i));
+                    break;
+
+                case "xorcfc0bit": // a8-af
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1 || i >= 8)
+                        return false;
+                    output.WriteByte((byte)(0xa8 | i));
+                    break;
+
+                case "jumpifroomflagset": //B0
+                    if (args.Length != 3)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    if (i == -1 || j == -1)
+                        return false;
                     output.WriteByte(0xB0);
                     output.WriteByte((byte)i);
+                    output.WriteWord((ushort)j);
                     break;
 
                 case "setroomflag": //B1
-                    if (args.Length < 2)
+                case "orroomflag":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -593,26 +843,114 @@ namespace ZOSE
                     output.WriteByte((byte)i);
                     break;
 
-                case "setglobalflag": //B6
-                    if (args.Length < 2)
+                // no b2
+
+                case "jumpifc6xxset": // b3
+                    if (args.Length != 4)
                         return false;
                     i = ParseHex(args[1]);
-                    if (i == -1)
+                    j = ParseHex(args[2]);
+                    k = ParseHex(args[3]);
+                    if (i == -1 || j == -1 || k == -1)
+                        return false;
+                    output.WriteByte(0xB3);
+                    output.WriteByte((byte)i);
+                    output.WriteByte((byte)j);
+                    output.WriteWord((ushort)k);
+                    break;
+
+                case "writec6xx": // b4
+                    if (args.Length != 3)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    if (i == -1 || j == -1)
+                        return false;
+                    output.WriteByte(0xB4);
+                    output.WriteByte((byte)i);
+                    output.WriteByte((byte)j);
+                    break;
+
+                case "jumpifglobalflagset": // b5
+                    if (args.Length != 3)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    if (i == -1 || j == -1)
+                        return false;
+                    output.WriteByte(0xB5);
+                    output.WriteByte((byte)i);
+                    output.WriteWord((ushort)j);
+                    break;
+
+                case "setglobalflag": //B6
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1 || i >= 0x80)
                         return false;
                     output.WriteByte(0xB6);
                     output.WriteByte((byte)i);
                     break;
 
+                case "unsetglobalflag": //B6
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1 || i >= 0x80)
+                        return false;
+                    output.WriteByte(0xB6);
+                    output.WriteByte((byte)(i | 0x80));
+                    break;
+
+                // no b7
+
+                case "setdisabledobjectsto91": //B8
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xB8);
+                    break;
+
+                case "setdisabledobjectsto00": //B9
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xB9);
+                    break;
+
+                case "setdisabledobjectsto11": //BA
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xBA);
+                    break;
+
+                case "disablemenu": //BB
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xBB);
+                    break;
+
+                case "enablemenu": //BC
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xBC);
+                    break;
+
                 case "disableinput": //BD
+                    if (args.Length != 1)
+                        return false;
                     output.WriteByte(0xBD);
                     break;
 
                 case "enableinput": //BE
+                    if (args.Length != 1)
+                        return false;
                     output.WriteByte(0xBE);
                     break;
 
+                // no bf
+
                 case "callscript": //C0
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -622,16 +960,167 @@ namespace ZOSE
                     output.WriteByte((byte)(i >> 8));
                     break;
 
+                case "retscript": //C1
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xC1);
+                    break;
+
+                // no c2
+
+                case "jumpiftextoptioneq": //C3
+                    if (args.Length != 3)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    if (i == -1 || j == -1)
+                        return false;
+                    output.WriteByte(0xC3);
+                    output.WriteByte((byte)i);
+                    output.WriteWord((ushort)j);
+                    break;
+
+                case "jumpalways": // C4
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
+                        return false;
+                    output.WriteByte(0xC4);
+                    output.WriteWord((ushort)i);
+                    break;
+
+                // no c5
+
+                case "jumptable_interactionbyte": // C6
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
+                        return false;
+                    output.WriteByte(0xC6);
+                    output.WriteByte((byte)i);
+                    break;
+
+                case "jumpifmemoryset": // C7
+                    if (args.Length != 4)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    k = ParseHex(args[3]);
+                    if (i == -1 || j == -1 || k == -1)
+                        return false;
+                    output.WriteByte(0xC7);
+                    output.WriteWord((ushort)i);
+                    output.WriteByte((byte)j);
+                    output.WriteWord((ushort)k);
+                    break;
+
+                case "jumpiftradeitemeq": // C8
+                    if (args.Length != 3)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    if (i == -1 || j == -1)
+                        return false;
+                    output.WriteByte(0xC8);
+                    output.WriteByte((byte)i);
+                    output.WriteWord((ushort)j);
+                    break;
+
+                case "jumpifnoenemies": //C9
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
+                        return false;
+                    output.WriteByte(0xC9);
+                    output.WriteWord((ushort)i);
+                    break;
+
+                case "jumpiflinkvariableneq": //CA
+                    if (args.Length != 4)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    k = ParseHex(args[3]);
+                    if (i == -1 || j == -1 || k == -1)
+                        return false;
+                    output.WriteByte(0xCA);
+                    output.WriteByte((byte)i);
+                    output.WriteByte((byte)j);
+                    output.WriteWord((ushort)k);
+                    break;
+
+                case "jumpifmemoryeq": //CB
+                    if (args.Length != 4)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    k = ParseHex(args[3]);
+                    if (i == -1 || j == -1 || k == -1)
+                        return false;
+                    output.WriteByte(0xCB);
+                    output.WriteWord((ushort)i);
+                    output.WriteByte((byte)j);
+                    output.WriteWord((ushort)k);
+                    break;
+
+                case "jumpifinteractionbyteeq": //CC
+                    if (args.Length != 4)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    k = ParseHex(args[3]);
+                    if (i == -1 || j == -1 || k == -1)
+                        return false;
+                    output.WriteByte(0xCC);
+                    output.WriteByte((byte)i);
+                    output.WriteByte((byte)j);
+                    output.WriteWord((ushort)k);
+                    break;
+
+                case "checkitemflag": //CD
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xCD);
+                    break;
+
+                case "checkroomflag40": //CE
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xCE);
+                    break;
+
                 case "checkspecialflag": //CF
+                case "checkroomflag80":
+                    if (args.Length != 1)
+                        return false;
                     output.WriteByte(0xCF);
                     break;
 
+                case "checkcollidedwithlink_onground": //D0
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xD0);
+                    break;
+
+                case "checkpalettefadedone": //D1
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xD1);
+                    break;
+
                 case "checkenemycount": //D2
+                case "checknoenemies":
+                    if (args.Length != 1)
+                        return false;
                     output.WriteByte(0xD2);
                     break;
 
                 case "checkmemorybit": //D3
-                    if (args.Length < 3)
+                case "checkflagset":
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     k = ParseHex(args[2]);
@@ -643,8 +1132,21 @@ namespace ZOSE
                     output.WriteByte((byte)(k >> 8));
                     break;
 
+                case "checkinteractionbyteeq": //D4
+                    if (args.Length != 3)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    if (i == -1 || j == -1)
+                        return false;
+                    output.WriteByte(0xD4);
+                    output.WriteByte((byte)i);
+                    output.WriteByte((byte)j);
+                    break;
+
                 case "checkmemory": //D5
-                    if (args.Length < 3)
+                case "checkmemoryeq":
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[2]);
                     k = ParseHex(args[1]);
@@ -656,47 +1158,131 @@ namespace ZOSE
                     output.WriteByte((byte)i);
                     break;
 
-                case "spawnitem": //DD
-                    if (args.Length < 3)
+                case "checknotcollidedwithlink_ignorez": //D6
+                    if (args.Length != 1)
                         return false;
-                    i = ParseHex(args[1]);
-                    j = ParseHex(args[2]);
-                    if (i == -1 || j == -1)
-                        return false;
-                    output.WriteByte(0xDD);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
+                    output.WriteByte(0xD6);
                     break;
 
-                case "giveitem": //DE
-                    if (args.Length < 3)
+                case "setcounter1": //D7
+                    if (args.Length != 2)
                         return false;
-                    i = ParseHex(args[1]);
-                    j = ParseHex(args[2]);
-                    if (i == -1 || j == -1)
-                        return false;
-                    output.WriteByte(0xDE);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
-                    break;
-
-                case "asm15": //0xE0
-                    if (args.Length < 2)
-                        break;
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xE0);
+                    output.WriteByte(0xD7);
                     output.WriteByte((byte)i);
-                    output.WriteByte((byte)(i >> 8));
+                    break;
+
+                // d8 implemented with the alternate checkcounter2iszero opcode
+                
+                case "checkheartdisplayupdated": //D9
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xD9);
+                    break;
+
+                case "checkrupeedisplayupdated": //DA
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xDA);
+                    break;
+
+                case "checkcollidedwithlink_ignorez": //DB
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xDB);
+                    break;
+
+                // no dc
+
+                case "spawnitem": //DD
+                    if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0xDD);
+                        output.WriteByte((byte)(i>>8));
+                        output.WriteByte((byte)(i&0xff));
+                    }
+                    else if (args.Length == 3) {
+                        i = ParseHex(args[1]);
+                        j = ParseHex(args[2]);
+                        if (i == -1 || j == -1)
+                            return false;
+                        output.WriteByte(0xDD);
+                        output.WriteByte((byte)i); //yy
+                        output.WriteByte((byte)j); //xx
+                    }
+                    else
+                        return false;
+                    break;
+
+                case "giveitem": //DE
+                    if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0xDD);
+                        output.WriteByte((byte)(i>>8));
+                        output.WriteByte((byte)(i&0xff));
+                    }
+                    else if (args.Length == 3) {
+                        i = ParseHex(args[1]);
+                        j = ParseHex(args[2]);
+                        if (i == -1 || j == -1)
+                            return false;
+                        output.WriteByte(0xDD);
+                        output.WriteByte((byte)i); //yy
+                        output.WriteByte((byte)j); //xx
+                    }
+                    else
+                        return false;
+                    break;
+
+                case "jumpifitemobtained": //DF
+                    if (args.Length != 3)
+                        return false;
+                    i = ParseHex(args[1]);
+                    j = ParseHex(args[2]);
+                    if (i == -1 || j == -1)
+                        return false;
+                    output.WriteByte(0xDF);
+                    output.WriteByte((byte)i); //yy
+                    output.WriteWord((ushort)j); //xx
+                    break;
+
+                case "asm15": //0xE0, 0xE1
+                    if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0xE0);
+                        output.WriteByte((byte)i);
+                        output.WriteByte((byte)(i >> 8));
+                    }
+                    else if (args.Length == 3) {
+                        i = ParseHex(args[1]);
+                        j = ParseHex(args[2]);
+                        if (i == -1 || j == -1)
+                            return false;
+                        output.WriteByte(0xE1);
+                        output.WriteByte((byte)i);
+                        output.WriteByte((byte)(i >> 8));
+                        output.WriteByte((byte)(j));
+                    }
+                    else
+                        return false;
                     break;
 
                 case "createpuff": //0xE2
+                    if (args.Length != 1)
+                        return false;
                     output.WriteByte(0xE2);
                     break;
 
                 case "playsound": //E3
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -706,7 +1292,7 @@ namespace ZOSE
                     break;
 
                 case "setmusic": //E4
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -716,7 +1302,8 @@ namespace ZOSE
                     break;
 
                 case "setcc8a": //E5
-                    if (args.Length < 2)
+                case "setdisabledobjects":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -726,19 +1313,30 @@ namespace ZOSE
                     break;
 
                 case "spawnenemyhere": //E6
-                    if (args.Length < 3)
-                        break;
-                    i = ParseHex(args[1]);
-                    k = ParseHex(args[2]);
-                    if (i == -1 || k == -1)
+                    if (args.Length == 2) {
+                        i = ParseHex(args[1]);
+                        if (i == -1)
+                            return false;
+                        output.WriteByte(0xE6);
+                        output.WriteByte((byte)(i>>8));
+                        output.WriteByte((byte)(i&0xff));
+                    }
+                    else if (args.Length == 3) {
+                        i = ParseHex(args[1]);
+                        k = ParseHex(args[2]);
+                        if (i == -1 || k == -1)
+                            return false;
+                        output.WriteByte(0xE6);
+                        output.WriteByte((byte)i);
+                        output.WriteByte((byte)k);
+                    }
+                    else
                         return false;
-                    output.WriteByte(0xE6);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)k);
                     break;
 
                 case "settilepos": //E7
-                    if (args.Length < 2)
+                case "settileat":
+                    if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -750,7 +1348,8 @@ namespace ZOSE
                     break;
 
                 case "settile": //E8
-                    if (args.Length < 2)
+                case "settilehere":
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -759,14 +1358,54 @@ namespace ZOSE
                     output.WriteByte((byte)i);
                     break;
 
+                case "updatelinkrespawnposition":
+                    if (args.Length != 1) //E9
+                        return false;
+                    output.WriteByte(0xE9);
+                    break;
+
                 case "shakescreen": //EA
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
                     output.WriteByte(0xEA);
                     output.WriteByte((byte)i);
+                    break;
+
+                case "initcollisions": //EB
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xEB);
+                    break;
+
+                case "movenpcup": //EC
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xEC);
+                    break;
+
+                case "movenpcright": //ED
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xED);
+                    break;
+
+                case "movenpcdown": //EE
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xEE);
+                    break;
+
+                case "movenpcleft": //EF
+                    if (args.Length != 1)
+                        return false;
+                    output.WriteByte(0xEF);
+                    break;
+
+                case "setdelay0": //F0
+                    output.WriteByte(0xF0);
                     break;
 
                 case "setdelay1": //F1
@@ -815,10 +1454,6 @@ namespace ZOSE
 
                 case "setdelay12": //FC
                     output.WriteByte(0xFC);
-                    break;
-
-                case "setdelay0": //F0
-                    output.WriteByte(0xF0);
                     break;
 
                 default:
