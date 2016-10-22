@@ -118,10 +118,12 @@ namespace ZOSE
         {
             if (compiler == null)
                 return;
-            int retval;
-            if ((retval = compiler.Compile(textBox1.Text)) != 0)
+            Tuple<int,int> retval;
+            if ((retval = compiler.Compile(textBox1.Text)) != null)
             {
-                MessageBox.Show("Error compiling on line " + retval + ".", "Error");
+                MessageBox.Show("Error compiling.", "Error");
+                textBox1.SelectionStart = retval.Item1;
+                textBox1.SelectionLength = retval.Item2;
                 return;
             }
             foreach (GBScript s in compiler.scripts)

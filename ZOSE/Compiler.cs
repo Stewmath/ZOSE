@@ -178,23 +178,25 @@ namespace ZOSE
             gb = g;
         }
 
-        public int Compile(string text)
+        public Tuple<int,int> Compile(string text)
         {
             scripts = new GBScript[1024];
             scripts[0] = new GBScript(1024);
             currentWriteIndex = -1;
             jumps = new List<int>();
             if (text == "")
-                return 0;
+                return null;
+            string[] linesOrig = text.Split('\n');
             string[] lines = text.Replace("\r", "").Split('\n');
-            int lineCount=0;
+            int charIndex=0;
+            int i=0;
             foreach (string s in lines)
             {
-                lineCount++;
                 if (!CompileLine(s))
-                    return lineCount;
+                    return new Tuple<int,int>(charIndex, s.Length);
+                charIndex += linesOrig[i++].Length + 1;
             }
-            return 0;
+            return null;
         }
 
         public bool CompileLine(string line)
