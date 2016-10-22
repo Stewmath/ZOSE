@@ -39,6 +39,7 @@ namespace ZOSE
             "jumproomflago",
             "unsetroomflag",
             "jump2byte",
+            "setvisible",
             "setstate",
             "set45",
             "setstate2",
@@ -87,6 +88,7 @@ namespace ZOSE
             "showtextdifferentforlinked",
             "checkcfc0bit",
             "xorcfc0bit",
+            "checkroomflag",
             "jumpifroomflagset",
             "setroomflag",
             "orroomflag",
@@ -215,7 +217,7 @@ namespace ZOSE
             {
                 //Custom
                 case "writelocation":
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -226,23 +228,29 @@ namespace ZOSE
                     break;
 
                 case "forceend":
+                    if (args.Length != 1)
+                        return false;
                     output.WriteByte(0);
                     break;
 
                 case "maketorcheslightable":
+                    if (args.Length != 1)
+                        return false;
                     output.WriteByte(0xE0);
                     output.WriteByte(0x4B);
                     output.WriteByte(0x4F);
                     break;
 
                 case "createpuffnodelay":
+                    if (args.Length != 1)
+                        return false;
                     output.WriteByte(0xE0);
                     output.WriteByte(0xC1);
                     output.WriteByte(0x24);
                     break;
 
                 case "jumptilecheck":
-                    if (args.Length < 4)
+                    if (args.Length != 4)
                         return false;
                     k = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -260,7 +268,7 @@ namespace ZOSE
                     break;
 
                 case "checktile":
-                    if (args.Length < 3)
+                    if (args.Length != 3)
                         return false;
                     k = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -273,7 +281,7 @@ namespace ZOSE
                     break;
 
                 case "setinteraction72":
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -285,7 +293,7 @@ namespace ZOSE
                     break;
 
                 case "jump3byte": //FD 00
-                    if (args.Length < 2)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
                     if (i == -1)
@@ -299,7 +307,7 @@ namespace ZOSE
                     break;
 
                 case "jumproomflag": //FD 01
-                    if (args.Length < 3)
+                    if (args.Length != 3)
                         return false;
                     j = ParseHex(args[1]);
                     i = ParseHex(args[2]);
@@ -315,7 +323,7 @@ namespace ZOSE
                     break;
 
                 case "jump3bytemc": //FD 02
-                    if (args.Length < 4)
+                    if (args.Length != 4)
                         return false;
                     k = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -334,7 +342,7 @@ namespace ZOSE
                     break;
 
                 case "jumproomflago": //FD 03
-                    if (args.Length < 5)
+                    if (args.Length != 5)
                         return false;
                     k = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -353,7 +361,7 @@ namespace ZOSE
                     break;
 
                 case "unsetroomflag": //FD 04
-                    if (args.Length < 4)
+                    if (args.Length != 4)
                         return false;
                     i = ParseHex(args[1]);
                     j = ParseHex(args[2]);
@@ -369,6 +377,34 @@ namespace ZOSE
                     output.WriteByte((byte)k);
                     break;
 
+                case ".db":
+                case "db":
+                    if (args.Length < 2)
+                        return false;
+                    i = 1;
+                    while (i < args.Length) {
+                        j = ParseHex(args[i]);
+                        if (j == -1)
+                            return false;
+                        output.WriteByte((byte)j);
+                        i++;
+                    }
+                    break;
+
+                case ".dw":
+                case "dw":
+                    if (args.Length < 2)
+                        return false;
+                    i = 1;
+                    while (i < args.Length) {
+                        j = ParseHex(args[i]);
+                        if (j == -1)
+                            return false;
+                        output.WriteWord((ushort)j);
+                        i++;
+                    }
+                    break;
+
                 //Final
 
                 case "jump2byte": //01-7F
@@ -380,8 +416,8 @@ namespace ZOSE
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
-                    // Formerly "setvisible"
-                case "setstate": //80
+                case "setvisible": //80
+                case "setstate":
                     if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
@@ -822,7 +858,8 @@ namespace ZOSE
                     output.WriteByte((byte)(0xa8 | i));
                     break;
 
-                case "jumpifroomflagset": //B0
+                case "checkroomflag": //B0
+                case "jumpifroomflagset":
                     if (args.Length != 3)
                         return false;
                     i = ParseHex(args[1]);
