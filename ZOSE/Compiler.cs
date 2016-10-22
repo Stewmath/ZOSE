@@ -192,7 +192,7 @@ namespace ZOSE
             int i=0;
             foreach (string s in lines)
             {
-                if (!CompileLine(s))
+                if (!CompileLine(s.Trim()))
                     return new Tuple<int,int>(charIndex, s.Length);
                 charIndex += linesOrig[i++].Length + 1;
             }
