@@ -25,5 +25,9 @@ namespace ZOSE
                 filename = filename.Substring(0, filename.Length - 1);
             Application.Run(new Form1(filename));
         }
+
+        public static bool IsRunningOnMono() {
+            return Type.GetType("Mono.Runtime") != null;
+        }
     }
 }

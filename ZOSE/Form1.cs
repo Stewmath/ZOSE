@@ -20,9 +20,10 @@ namespace ZOSE
         string scriptFilename = "";
         bool[] safeAddresses;
 
-        // Using this breaks compatibility with mono
-        //[System.Runtime.InteropServices.DllImport("user32.dll")]
-        //public static extern int GetScrollPos(IntPtr hWnd, int nBar);
+        // Any function calls to user32 functions need to be wrapped in if statements so they
+        // don't get run on mono, since mono doesn't support this
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int GetScrollPos(IntPtr hWnd, int nBar);
 
         public Form1(string filename)
         {
@@ -504,8 +505,10 @@ namespace ZOSE
                 y += 16;
 
                 // Using GetScrollPos from user32.dll breaks compatibility with mono
-                //y -= GetScrollPos(textBox1.Handle, 1) * 16;
-                //x -= GetScrollPos(textBox1.Handle, 0);
+                if (!Program.IsRunningOnMono()) {
+                    y -= GetScrollPos(textBox1.Handle, 1) * 16;
+                    x -= GetScrollPos(textBox1.Handle, 0);
+                }
 
                 foreach (string s in Compiler.commands)
                 {
