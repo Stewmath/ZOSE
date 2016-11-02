@@ -9,6 +9,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <meta name=Generator content="Microsoft Word 11">
 <meta name=Originator content="Microsoft Word 11">
 <link rel=File-List href="ZOSE_files/filelist.xml">
+<link rel="stylesheet" href="styles.css">
 <title>ZOSE Documentation</title>
 <o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
  name="country-region"/>
@@ -179,6 +180,75 @@ ol
 ul
 	{margin-bottom:0in;}
 -->
+
+body {
+	<!--background-color: #111314;-->
+}
+h1,h2,h3,h4,h5,h6{
+	<!--color: white;-->
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.centered{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+p.centered{
+	margin-left: auto;
+	margin-right: auto;
+}
+#contents{
+	margin-left: auto;
+}
+li{
+	<!--color: white;-->
+}
+#line{
+	width: 55%;
+	height: 10px;
+	background-color: black;<!--background-color: white;-->
+	border-style: none;
+}
+#table2{
+	border: 3px solid black;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	width:100%;
+}
+.boxesl{
+	border: 2px solid black;
+	padding-top: 3px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+	text-align: center;
+	width: 150px;
+}
+.boxes{
+	border: 2px solid black;
+	padding-top: 3px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+	padding-left: 7px;
+}
+.boxes2{
+	border: 2px solid black;
+	padding-top: 3px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+	text-align: center;
+}
+.centeredtext{
+	text-align: center;
+}
+
+label{
+	color: #FFFFFF;
+}
 </style>
 <!--[if gte mso 10]>
 <style>
@@ -207,8 +277,8 @@ ul
 <div class=Section1>
 
 <p class=style4 align=center style='text-align:center'>ZOSE Documentation</p>
-
-<p><span class=style51><span style='font-size:13.5pt'>Table of Contents</span></span></p>
+<hr id=line />
+<p><span class=style51><span style='font-size:13.5pt; margin-left: 0.40in;'>Table of Contents:</span></span></p>
 
 <blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
 
@@ -219,11 +289,12 @@ ul
 <a href="#commandscustom">Commands - Custom</a><br>
 <a href="#commandsdefault">Commands - Default</a> <br>
 <a href="#memoryaddresses">Memory Addresses </a><br>
+<a href="#sampleexamples">Example Scripts</a><br>
 <a href="#credits">Credits</a><o:p></o:p></p>
 
 </blockquote>
 
-<h4 id=gettingstarted><span class=style51><span style='font-size:13.5pt'>Getting
+<h4 id=gettingstarted class=centered><span class=style51><span style='font-size:13.5pt'>Getting
 Started</span></span></h4>
 
 <blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
@@ -242,8 +313,9 @@ disable the ability to actually use ZOSE.<o:p></o:p></p>
 opcodes.
 
 </blockquote>
+<br />
 
-<h4 id=thingsyoushouldknow><span class=style51><span style='font-size:13.5pt'>Things
+<h4 id=thingsyoushouldknow class=centered><span class=style51><span style='font-size:13.5pt'>Things
 You Should Know </span></span></h4>
 
 <ul type=disc>
@@ -298,8 +370,9 @@ You Should Know </span></span></h4>
      worry about the space a script takes up though, because when compiling
      ZOSE will notify you if the space required is greater than 256 bytes. <o:p></o:p></li>
 </ul>
+<br />
 
-<h4 id=interaction72><span style='font-size:13.5pt'>Interaction 72 - Using
+<h4 id=interaction72 class=centered><span style='font-size:13.5pt'>Interaction 72 - Using
 Custom Scripts<o:p></o:p></span></h4>
 
 <blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
@@ -328,7 +401,7 @@ full thing to do in the template.<o:p></o:p></p>
 
 </blockquote>
 
-<h3><span id=template><span class=style51>Recommended Template</span></span></h3>
+<h3 class=centered><span id=template><span class=style51>Recommended Template</span></span></h3>
 
 <blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
 
@@ -349,8 +422,9 @@ second half of your interaction id)</span></em><br>
 </blockquote>
 
 </blockquote>
+<br />
 
-<h3><span id=commandscustom><span class=style51>Commands</span></span> - Custom
+<h3 class=centered><span id=commandscustom><span class=style51>Commands</span></span> - Custom
 </h3>
 
 <blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
@@ -361,281 +435,282 @@ second half of your interaction id)</span></em><br>
   <p> Commands with "*" at the end are new opcodes in Drenn's updated ZOSE, or
   new aliases for old commands.
 
-  <table class=MsoNormalTable border=1 cellpadding=0 width=1070 style='width:
-  802.5pt;mso-cellspacing:1.5pt'>
+  <table id=table2 border=1 width=1070>
     <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-      <td width=59 style='width:44.25pt;padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxesl>
         <p class=MsoNormal align=center style='text-align:center'><b>Opcode<o:p></o:p></b></p>
       </td>
-      <td width=153 style='width:114.75pt;padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxesl>
         <p class=MsoNormal align=center style='text-align:center'><b>Command<o:p></o:p></b></p>
       </td>
-      <td width=480 style='width:5.0in;padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxesl>
         <p class=MsoNormal align=center style='text-align:center'><b>Description<o:p></o:p></b></p>
       </td>
-      <td width=51 style='width:38.25pt;padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxesl>
         <p class=MsoNormal align=center style='text-align:center'><b>Args Length <o:p></o:p></b></p>
       </td>
-      <td width=293 style='width:219.75pt;padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxesl>
         <p class=MsoNormal align=center style='text-align:center'><b>Arguments<o:p></o:p></b></p>
       </td>
     </tr>
     <tr style='mso-yfti-irow:1'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>None</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>WriteLocation</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Sets the address to compile the script to. This can be
         anywhere. </p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>1</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Compile Address</p>
       </td>
     </tr>
-    <tr style='mso-yfti-irow:2'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>D5</p>
+	    <tr style='mso-yfti-irow:2'>
+      <td class=boxes2>
+        <p class=MsoNormal>None</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>CheckTile</p>
+      <td class=boxes>
+        <p class=MsoNormal>SetInteraction72</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Holds the script if the tile at the location does not
-        match the specified tile.</p>
+      <td class=boxes>
+        <p class=MsoNormal>Sets the script address of interaction 72xx to the current
+        compile location. </p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>2</p>
+      <td class=boxes2>
+        <p class=MsoNormal>1</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Tile position (YX), Tile</p>
+      <td class=boxes>
+        <p class=MsoNormal>Interaction 72 index </p>
       </td>
     </tr>
-    <tr style='mso-yfti-irow:3'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>E0</p>
+	<tr style='mso-yfti-irow:3'>
+      <td class=boxes2>
+        <p class=MsoNormal>00</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>MakeTorchesLightable</p>
+      <td class=boxes>
+        <p class=MsoNormal>ForceEnd</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Creates a bank 15 assembly procedure call making torches
-        lightable. </p>
+      <td class=boxes>
+        <p class=MsoNormal>Forces the script to end.</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>0</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>None</p>
       </td>
     </tr>
     <tr style='mso-yfti-irow:4'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>E0</p>
+      <td class=boxes2>
+        <p class=MsoNormal>D5</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>CreatePuffNoDelay</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Creates a puff without holding up the script. </p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>0</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>None</p>
-      </td>
-    </tr>
-    <tr style='mso-yfti-irow:5'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>FF 02</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>CheckTile</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Jumps if the tile at the location matches the specified
-        tile.</p>
+      <td class=boxes>
+        <p class=MsoNormal>Holds the script if the tile at the location does not
+        match the specified tile.</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>3</p>
+      <td class=boxes2>
+        <p class=MsoNormal>2</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Tile position (YX), Tile, Jump address</p>
+      <td class=boxes>
+        <p class=MsoNormal>Tile position (YX), Tile</p>
+      </td>
+    </tr>
+	<tr style='mso-yfti-irow:5'>
+      <td class=boxes2>
+        <p class=MsoNormal>E0</p>
+      </td>
+      <td class=boxes>
+        <p class=MsoNormal>CreatePuffNoDelay</p>
+      </td>
+      <td class=boxes>
+        <p class=MsoNormal>Creates a puff without holding up the script. </p>
+      </td>
+      <td class=boxes2>
+        <p class=MsoNormal>0</p>
+      </td>
+      <td class=boxes>
+        <p class=MsoNormal>None</p>
       </td>
     </tr>
     <tr style='mso-yfti-irow:6'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
+        <p class=MsoNormal>E0</p>
+      </td>
+      <td class=boxes>
+        <p class=MsoNormal>MakeTorchesLightable</p>
+      </td>
+      <td class=boxes>
+        <p class=MsoNormal>Creates a bank 15 assembly procedure call making torches
+        lightable. </p>
+      </td>
+      <td class=boxes2>
+        <p class=MsoNormal>0</p>
+      </td>
+      <td class=boxes>
         <p class=MsoNormal>None</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>SetInteraction72</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Sets the script address of interaction 72xx to the current
-        compile location. </p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>1</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Interaction 72 index </p>
       </td>
     </tr>
     <tr style='mso-yfti-irow:7'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>00</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>ForceEnd</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>Forces the script to end.</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>0</p>
-      </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
-        <p class=MsoNormal>None</p>
-      </td>
-    </tr>
-    <tr style='mso-yfti-irow:8'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>FF 00 </p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Jump3Byte</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Jumps to anywhere in the ROM. </p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>1</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Jump address</p>
       </td>
     </tr>
-    <tr style='mso-yfti-irow:9'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+    <tr style='mso-yfti-irow:8'>
+      <td class=boxes2>
         <p class=MsoNormal>FF 01 </p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>JumpRoomFlag</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Jumps to anywhere in the ROM if the specified room flags
         are set. </p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>2</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Room flags, Jump address</p>
       </td>
     </tr>
-    <tr style='mso-yfti-irow:10'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+	<tr style='mso-yfti-irow:9'>
+      <td class=boxes2>
         <p class=MsoNormal>FF 02</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
+        <p class=MsoNormal>CheckTile</p>
+      </td>
+      <td class=boxes>
+        <p class=MsoNormal>Jumps if the tile at the location matches the specified
+        tile.</p>
+      </td>
+      <td class=boxes2>
+        <p class=MsoNormal>3</p>
+      </td>
+      <td class=boxes>
+        <p class=MsoNormal>Tile position (YX), Tile, Jump address</p>
+      </td>
+    </tr>
+    <tr style='mso-yfti-irow:10'>
+      <td class=boxes2>
+        <p class=MsoNormal>FF 02</p>
+      </td>
+      <td class=boxes>
         <p class=MsoNormal>Jump3ByteMC</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Jumps to anywhere in the ROM if a specified byte in the
         memory matches.</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>3</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Memory address, Byte, Jump address</p>
       </td>
     </tr>
+	
     <tr style='mso-yfti-irow:11'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>FF 03</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>JumpRoomFlagO</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Jumps to anywhere in the ROM if the flags in a specified
         room are set.</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>4</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Map, Group, Flags, Jump address</p>
       </td>
     </tr>
     <tr style='mso-yfti-irow:12;mso-yfti-lastrow:yes'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>FF 04</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>UnsetRoomFlag</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Unsets the specified room flag of the specified room.</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>3</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Bit index, Map, Group</p>
       </td>
     </tr>
     <tr style='mso-yfti-irow:12;mso-yfti-lastrow:yes'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>None</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>.db*</p>
         <p class=MsoNormal>db*</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Defines a byte. Only useful if you want to input opcodes by
         hand for some reason. </p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>1-</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Byte, [Byte] ...</p>
       </td>
     </tr>
     <tr style='mso-yfti-irow:12;mso-yfti-lastrow:yes'>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>None</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>.dw*</p>
         <p class=MsoNormal>dw*</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Defines a little-endian word. This can be used with
         JumpTable_MemoryAddress or JumpTable_InteractionByte to define an
         arbitrary number of jump addresses.
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes2>
         <p class=MsoNormal>1-</p>
       </td>
-      <td style='padding:.75pt .75pt .75pt .75pt'>
+      <td class=boxes>
         <p class=MsoNormal>Word, [Word] ...</p>
       </td>
     </tr>
   </table>
 
 </blockquote>
+<br />
 
-<h3><span id=commandsdefault><span class=style51>Commands</span></span> -
+<h3 class=centered><span id=commandsdefault><span class=style51>Commands</span></span> -
 Default </h3>
 
 <blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
@@ -646,251 +721,250 @@ without the leading 0x or $.<o:p></o:p></p>
 <p> Commands with "*" at the end are new opcodes in Drenn's updated ZOSE, or
 new aliases for old commands.
 
-<table class=MsoNormalTable border=1 cellpadding=0 width=1070 style='width:
-802.5pt;mso-cellspacing:1.5pt'>
+<table id=table2 border=1 width=1070>
   <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-    <td width=59 style='width:44.25pt;padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxesl>
       <p class=MsoNormal align=center style='text-align:center'><b>Opcode<o:p></o:p></b></p>
     </td>
-    <td width=153 style='width:114.75pt;padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxesl>
       <p class=MsoNormal align=center style='text-align:center'><b>Command<o:p></o:p></b></p>
     </td>
-    <td width=480 style='width:5.0in;padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxesl>
       <p class=MsoNormal align=center style='text-align:center'><b>Description<o:p></o:p></b></p>
     </td>
-    <td width=51 style='width:38.25pt;padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxesl>
       <p class=MsoNormal align=center style='text-align:center'><b>Args Length <o:p></o:p></b></p>
     </td>
-    <td width=293 style='width:219.75pt;padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxesl>
       <p class=MsoNormal align=center style='text-align:center'><b>Arguments<o:p></o:p></b></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:1'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>01-7F</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump2Byte</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jumps to a memory address with bank 0C active (Jumps to x
       in bank 0C) </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:2'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>80</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetState*</p>
       <p class=MsoNormal>SetVisible</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the interaction's Dx44 value. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:3'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>81</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetState2*</p>
       <p class=MsoNormal>Set45</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the interaction's Dx45 value. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:4'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>83</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>LoadScript*</p>
       <p class=MsoNormal>Load100</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Loads 0x100 bytes into RAM at 0xc300. This may be
       effectively the same as "Jump3Byte". </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Bank, Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:5'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>84</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SpawnInteraction*</p>
       <p class=MsoNormal>SpawnCommon</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Spawns a type 2 interaction. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>4</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ID1, ID2, Y, X </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:6'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>85</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SpawnEnemy</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Spawns a type 7 interaction. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>4</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ID1, ID2, Y, X </p>
       <p class=MsoNormal>Or: ID (word), Y, X
     </td>
   </tr>
   <tr style='mso-yfti-irow:7'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>86</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ShowPasswordScreen</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Shows the password screen, most likely with the specified
       password. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Password?</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:8'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>87</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpTable_MemoryAddress*</p>
       <p class=MsoNormal>LoadRel</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Read a memory address, and jump to one of the following
       addresses depending on the value. Use .dw to specify the possible
       addresses to jump to. See example </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address (word), [List of jump addresses] </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:9'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>88</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetCoords</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the interaction's coordinates. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Y, X </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:10'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>89</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
-      <p class=MsoNormal>SetMovingDirection*</p>
+    <td class=boxes>
+      <p class=MsoNormal>SetAngle*</p>
       <p class=MsoNormal>Set49</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
-      <p class=MsoNormal>Sets the interaction's Dx49 value, which corresponds to the
-      direction it's moving it. </p>
+    <td class=boxes>
+      <p class=MsoNormal>Sets the interaction's Dx49 value, which corresponds its angle (a
+      value from 00-1f). </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:11'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>8A</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>TurnToFaceLink*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the object's animation to face towards Link. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal> </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:11'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>8B</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetSpeed*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
-      <p class=MsoNormal>Sets the object's speed, mainly for npc's. The values
-      are a bit odd; 0x14 is a fairly standard speed for moving forward. </p>
+    <td class=boxes>
+      <p class=MsoNormal>Sets the object's speed, mainly for npc's. This should be
+      a multiple of 5, in decimal. A value of 28 (40 in decimal) is Link's walking speed. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Speed </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:11'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>8C, D8</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckCounter2IsZero*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds the script until the object's second counter
       (Dx47) is zero. Takes an optional parameter which resets Dx47 to that
       value when it ticks down to zero.
@@ -899,1783 +973,1816 @@ new aliases for old commands.
       rather than waiting for it to count down.
       <p>Note 2: All interactions have assembly code which ticks this counter
       down whenever it is nonzero.
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0-1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>[New Counter Value] </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:11'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>8D</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetCollisionRadii*</p>
       <p class=MsoNormal>LoadD6667</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the Y and X values for the object's collision
       radius (Dx66 and Dx67, respectively). </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Y Radius, X Radius </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:12'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>8E</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>WriteInteractionByte*</p>
       <p class=MsoNormal>SetInteractionFactor</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets a byte in the interaction's range of 0x40 bytes
       (Dx40-Dx7f). </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB (in the range of 40-7f), Value </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:13'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>8F</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetAnimation*</p>
       <p class=MsoNormal>LoadSprite</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets interaction's animation. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Animation index</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:14'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>90</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CpLinkX*</p>
       <p class=MsoNormal>CheckLinkXToMA</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Check and compare Link's X to the interaction's X and
       write result to DxYY. If this.x &gt;= Link.x, 00 is written, otherwise 01 is
       written.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB to write result to </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:15'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>91</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>WriteMemory*</p>
       <p class=MsoNormal>SetMemory</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Writes a value to the specified memory address. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address (word), Value </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:16'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>92</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ORMemory</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ORs a value at the specified memory address by a value and
       writes the result. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address (word), Value </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:17'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>93</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>GetRandomBits*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Gets a random value, ANDs it with parameter 2, and
       stores it in the interaction's memory indicated by parameter 1.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB, AND Value </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:17'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>94</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>AddInteractionByte*</p>
       <p class=MsoNormal>AddSetInteractionFactor</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Adds a value to a byte in the interaction's range of 0x40
       bytes (Dx40-Dx7f).</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB, Value </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:17'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>95</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetZSpeed*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the interaction's Z axis speed, mainly for npc's.
       A value of fe40 is a good value for jumping.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Z Speed (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:18'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>96</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
-      <p class=MsoNormal>SetMovingDirectionAndAnimation*</p>
+    <td class=boxes>
+      <p class=MsoNormal>SetAngleAndAnimation*</p>
       <p class=MsoNormal>Set49Extra</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the interaction's Dx49 value, which corresponds to
       the direction it's moving in, and updates its animation to face the
       correct direction.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:19'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>97</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>RunGenericNPC*</p>
       <p class=MsoNormal>SetTextIDJP</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the interaction's text ID and jumps to script
       305F0, which is a barebones npc script.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1-2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>TextID1, TextID2 </p>
       <p class=MsoNormal>Or: TextID (word, big-endian) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:19'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>97</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>RunGenericNPCLowIndex*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Same as above, but assumes that Dx70 is nonzero,
       indicating that only one byte should be read for this opcode. TextID1 will
       instead be read from Dx73.
       <p>Note: Using the wrong variant of opcode 97 will cause the script to
       misbehave.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>TextID2 </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:19'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>98</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ShowText</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Shows the given text ID.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1-2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>TextID1, TextID2 </p>
       <p class=MsoNormal>Or: TextID (word, big-endian) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:19'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>98</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ShowTextLowIndex*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Same as above, but assumes that Dx70 is nonzero,
       indicating that only one byte should be read for this opcode. TextID1 will
       instead be read from Dx73.
       <p>Note: Using the wrong variant of opcode 98 will cause the script to
       misbehave.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>TextID2 </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:21'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>99</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckText</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds the script if text is open. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:19'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>9A</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ShowTextNonExitable*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Shows the given text ID, and prevents the player from
       closing the textbox. The script can close the textbox by writing 00 to
       cba0.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1-2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>TextID1, TextID2 </p>
       <p class=MsoNormal>Or: TextID (word, big-endian) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:19'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>9A</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ShowTextNonExitableLowIndex*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Same as above, but assumes that Dx70 is nonzero,
       indicating that only one byte should be read for this opcode. TextID1 will
       instead be read from Dx73.
       <p>Note: Using the wrong variant of opcode 9A will cause the script to
       misbehave.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>TextID2 </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:19'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>9B</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>MakeAButtonSensitive*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Enables the use of the CheckAButton command. This does
       not initialize the object's collisionRadius, so either use this in
       conjunction with SetCollisionRadii, or use InitCollisions instead of this.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal> </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:22'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>9C</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetTextID</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the interaction's text ID. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1-2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>TextID1, TextID2 </p>
       <p class=MsoNormal>Or: TextID (word, big-endian) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:23'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>9D</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ShowLoadedText</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Shows the interaction's text ID. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:24'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>9E</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckAButton</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Checks to see if the A button is being pressed. One of
       the "MakeAButtonSensitive" or "InitCollisions" commands must have been
       used prior to this.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:24'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>9F</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ShowTextDifferentForLinked*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>In an unlinked game, this is equivalent to "ShowText ID1
       ID2". In a linked game, this is equivalent to "ShowText ID1 ID3".
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ID1 ID2 ID3</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:24'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>A0-A7</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckCFC0Bit*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds execution until the given bit of CFC0 is set.
       This may be related to cutscenes.
       <p>Note: The parameter is a bit value (0-7), not a bitmask.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:24'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>A8-AF</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>XorCFC0Bit*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Xors the given bit in CFC0.
       This may be related to cutscenes.
       <p>Note: The parameter is a bit value (0-7), not a bitmask.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:25'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfRoomFlagSet*</p>
       <p class=MsoNormal>CheckRoomFlag</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>If the room flags AND parameter 1 are nonzero, jump to
       the specified address.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value, Jump Address (word)</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:26'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>OrRoomFlag*</p>
       <p class=MsoNormal>SetRoomFlag</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ORs the room's flag by a certain value. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfC6xxSet*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jumps to the specified address if the value at C6xx
       (where xx is parameter 1) AND parameter 2 is nonzero.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB, AND Value, Jump Address (word)</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B4</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>WriteC6xx*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Writes the value of parameter 2 to C6xx, where xx is
       parameter 1.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB, Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B5</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfGlobalFlagSet*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jumps to the specified address if the given global flag
       is set.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Flag Index, Jump Address (word)</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B6</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetGlobalFlag</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets a global flag. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B6</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>UnsetGlobalFlag*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Unsets a global flag. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B8</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetDisabledObjectsTo91*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets CC8A to 91. This appears to disable link, items,
       enemies, and possibly more, freezing them in place. </p> </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>B9</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetDisabledObjectsTo00*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets CC8A to 00, re-enabling any disabled objects.
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>BA</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetDisabledObjectsTo11*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets CC8A to 11. This appears to disable link and
       items, freezing them in place.
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>BB</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>DisableMenu*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Disables the menu.
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:27'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>BC</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>EnableMenu*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Re-enables the menu.
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:28'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>BD</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>DisableInput</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Disables user input. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:29'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>BE</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>EnableInput</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Enables user input. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>C0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CallScript</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Calls a script. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Bank 0C script (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>C1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>RetScript*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Return from a CallScript command. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal> </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>C3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfTextOptionEq*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump if the selected option from a textbox equals the
       given value. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Option Index </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>C4</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpAlways*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Very similar to Jump2Byte? One minor difference is the
       ability to jump to RAM (though not very useful).
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>C6</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpTable_InteractionByte*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Read one of the interaction's variables at Dx40-Dx7f,
       and jump to one of the following addresses depending on the value. Use .dw
       to specify the possible addresses to jump to. Similar to
       JumpTable_MemoryAddress. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB, [List of jump addresses] </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>C7</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfMemorySet*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump if the memory at the specified address AND
       parameter 2 is nonzero.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Memory Address (word), AND Value, Jump Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>C8</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfTradeItemEq*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump if the value of the current trade item (minus one)
       (at C6C0) equals a value.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value, Jump Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>C9</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfNoEnemies*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump if there are no enemies on the screen (CDD1 == 0).
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>CA</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfLinkVariableNeq*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump if a variable at D0xx, where xx is between 00 and
       3f, is not equal to the given value. These are link's object variables.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB, Value, Jump Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>CB</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfMemoryEq*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump if a memory address equals a value.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address (word), Value, Jump Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:30'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>CC</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfInteractionByteEq*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jump if one of the interaction's bytes (Dx40-Dx7f)
       equals a value.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB, Value, Jump Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:31'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>CD</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckItemFlag</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Checks the room's item flag (bit 5), and if it's set,
       the script holds until it's not. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:31'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>CE</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckRoomFlag40*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Checks bit 6 of the room flags, and if it's set, the
       script holds until it's not. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:32'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>CF</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckRoomFlag80*</p>
       <p class=MsoNormal>CheckSpecialFlag</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Checks the room's flags, and if the 7th bit is set, it
       holds until it's not. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:32'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckCollidedWithLink_OnGround*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds execution until the interaction collides with
       Link, and link is on the ground. Must set the collision radius with either
       initCollisions or setCollisionRadii beforehand.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:32'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckPaletteFadeDone*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds execution until any palette fading is complete.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:33'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckNoEnemies*</p>
       <p class=MsoNormal>CheckEnemyCount</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Checks the enemy count (CDD1) and holds the script until it's 0. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:34'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckFlagSet*</p>
       <p class=MsoNormal>CheckMemoryBit</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Checks a memory bit and holds the script until it's
       set. If the bit is above 7, it checks the following memory address(es). </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Bit, Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:35'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D4</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckInteractionByteEq*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds the script until one of the interaction's bytes
       (Dx40-Dx7f) equals a value.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address LB, Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:35'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D5</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckMemoryEq*</p>
       <p class=MsoNormal>CheckMemory</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds the script if the byte at the supplied address does
       not match the value. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Address (word), Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:35'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D6</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckNotCollidedWithLink_IgnoreZ*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds execution until the interaction is not colliding
       with Link, ignoring his Z position. Must set the collision radius with
       either initCollisions or setCollisionRadii beforehand.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:35'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D7</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetCounter1*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the interaction's Dx46 variable, causing it to
       hold execution of the script for that many frames. Effectively this
       appears the same as "CheckCounter2IsZero" when given a parameter?
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:35'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>D9</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckHeartDisplayUpdated*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds execution of the script until link's heart
       display is fully updated after gaining or losing health.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal> </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:35'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>DA</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckRupeeDisplayUpdated*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds execution of the script until link's rupee count
       is fully updated after gaining or losing rupees.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal> </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:32'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>DB</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CheckCollidedWithLink_IgnoreZ*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Holds execution until the interaction collides with
       Link, ignoring their Z positions. Must set the collision radius with
       either initCollisions or setCollisionRadii beforehand.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:36'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>DD</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SpawnItem</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Spawns an item at the interaction's location with the same
       ID format as chests. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1-2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ID1, ID2 </p>
       <p class=MsoNormal>Or: ID (word, big-endian) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:37'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>DE</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>GiveItem</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Makes Link acquire the specified item with same ID format
       as chests.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1-2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ID1, ID2 </p>
       <p class=MsoNormal>Or: ID (word, big-endian) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:37'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>DF</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>JumpIfItemObtained*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Jumps if the specified item index is obtained. (See
       constants/questItems.s in the disassembly) </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Item index, Jump Address (word) </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:38'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E0, E1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ASM15</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Calls an assembly procedure in bank 15. Takes an
       optional parameter which, if given, is loaded into the "e" register before
       running the asm. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0-1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>[ASM Parameter] </p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:39'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>CreatePuff</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Creates a puff at the interaction's location.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:40'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E3</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>PlaySound</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Plays the given sound or music. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:41'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E4</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetMusic</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the music to the specified sound or music. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:42'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E5</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetDisabledObjects*</p>
       <p class=MsoNormal>SetCC8A</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Sets the byte at CC8A to the specified value, which
       disables various objects depending on the value given. Bit 0 disables
       Link, Bit 1 disables interactions (including the script running the
       command!), Bit 2 disables enemies, Bit 4 disables items, and Bit
       7 disables many things. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:43'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E6</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SpawnEnemyHere</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Spawns a type 7 interaction at the interaction's
       coordinates.</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1-2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ID1, ID2</p>
       <p class=MsoNormal>Or: ID (word, big-endian)</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:44'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E7</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetTileAt*</p>
       <p class=MsoNormal>SetTilePos</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>When the room has transitioned, sets the tile at the
       specified coordinates. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>2</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>YX, Tile</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:45'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E8</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>SetTileHere*</p>
       <p class=MsoNormal>SetTile</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>When the room has transitioned, sets the tile at the
       interaction's coordinates. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:45'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>E9</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>UpdateLinkRespawnPosition*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Update the position Link respawns at when he falls into
       a hole, gets squished, etc.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:46'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>EA</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>ShakeScreen</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Shakes the screen for the delay given (1 Second = 3C, or
       60 in decimal) </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Value</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:46'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>EB</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>InitCollisions*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Initializes an object's collision radius if not set
       already, and makes the A button sensitive. Usually used to initialize
       npc's.
       <p> This is equivalent to: SetCollisionRadii 06 06; MakeAButtonSensitive.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal></p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:46'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>EC</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>MoveNPCUp*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Moves an npc up for the given number of frames. The
       "SetSpeed" command should have been used prior to this.
       <p>You can do "MoveNpcUp 00" to just turn the npc in that direction.
       <p>"SetSpeed 14; MoveNpcUp 21" will move the npc one tile.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Amount of time to move</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:46'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>ED</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>MoveNPCRight*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Moves an npc right for the given number of frames. See
       "MoveNpcUp" for details.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Amount of time to move</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:46'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>EE</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>MoveNPCDown*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Moves an npc down for the given number of frames. See
       "MoveNpcUp" for details.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Amount of time to move</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:46'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>EF</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>MoveNPCLeft*</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Moves an npc left for the given number of frames. See
       "MoveNpcUp" for details.
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>1</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>Amount of time to move</p>
     </td>
   </tr>
   <tr style='mso-yfti-irow:47;mso-yfti-lastrow:yes'>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>F0-FC</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
-      <p class=MsoNormal>SetDelay</p>
+    <td class=boxes>
+      <p class=MsoNormal>SetDelayXX</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
-      <p class=MsoNormal>* is a number from 0-12. Sets a delay of the script with
+    <td class=boxes>
+      <p class=MsoNormal>XX is a number from 0-12. Sets a delay of the script with
       defined times. </p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes2>
       <p class=MsoNormal>0</p>
     </td>
-    <td style='padding:.75pt .75pt .75pt .75pt'>
+    <td class=boxes>
       <p class=MsoNormal>None</p>
     </td>
   </tr>
 </table>
 
 </blockquote>
+<br />
 
-<p><span id=memoryaddresses><span class=style51><span style='font-size:13.5pt'>Memory
-Addresses</span></span></span></p>
+<h3 class=centered><span id=memoryaddresses><span class=style51><span style='font-size:13.5pt'>Memory
+Addresses</span></span></span></h3>
 
 <blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
 
 <p>Here are some memory addresses that may or may not aid in script creating. <o:p></o:p></p>
 
-<table class=MsoNormalTable border=1 cellpadding=0 width=1070 style='width:
- 802.5pt;mso-cellspacing:1.5pt'>
+<table id=table2 border=1 width=1070>
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-  <td width=81 style='width:60.75pt;padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxesl>
   <p class=MsoNormal align=center style='text-align:center'><b>Address<o:p></o:p></b></p>
   </td>
-  <td width=465 style='width:348.75pt;padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxesl>
   <p class=MsoNormal align=center style='text-align:center'><b>Definition<o:p></o:p></b></p>
   </td>
-  <td width=502 style='width:376.5pt;padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxesl>
   <p class=MsoNormal align=center style='text-align:center'><b>Format<o:p></o:p></b></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CC29</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Buttons being pressed </p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>1 Bit for each button </p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:2'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CC2A</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>The buttons that have been pressed (only pressed) on the
-  current cycle</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>1 Bit for each button </p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:3'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes2>
   <p class=MsoNormal>C622</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>A cycle counter.</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>A simple byte. Goes up about 0x40 (64) times a second.</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:4'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+ <tr style='mso-yfti-irow:2'>
+  <td class=boxes2>
   <p class=MsoNormal>C688</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>B Weapon </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>Weapon ID </p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:5'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+ <tr style='mso-yfti-irow:3'>
+  <td class=boxes2>
   <p class=MsoNormal>C689</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>A Weapon </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>Weapon ID </p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:6'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>C6C4</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Selected Seed Satchel seed </p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Seed</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:7'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>C6C5</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Select Seed Shooter seed </p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Seed</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:8'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <tr style='mso-yfti-irow:4'>
+  <td class=boxes2>
   <p class=MsoNormal>C69E</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>Seeds the player has</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>1 Bit for each seed </p>
   </td>
  </tr>
+  <tr style='mso-yfti-irow:5'>
+  <td class=boxes2>
+  <p class=MsoNormal>C6AA</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Link's Current health</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>00 = Dead, 40 = Full </p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td class=boxes2>
+  <p class=MsoNormal>C6AB</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Link's Max health </p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>00 = Dead, 40 = Full </p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td class=boxes2>
+  <p class=MsoNormal>C6AD</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Link's Rupee count lower (BCD Value)</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Tens and ones place ($TO)</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td class=boxes2>
+  <p class=MsoNormal>C6AE</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Link's Rupee count higher (BCD Value)</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Hundreds place ($0H)</p>
+  </td>
+ </tr>
  <tr style='mso-yfti-irow:9'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CD02</p>
+  <td class=boxes2>
+  <p class=MsoNormal>C6C4</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Last map transition direction (00 = Up, 01 = Right, 02 =
-  Down, 03 = Left) </p>
+  <td class=boxes>
+  <p class=MsoNormal>Selected Seed Satchel seed </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Map transition </p>
+  <td class=boxes>
+  <p class=MsoNormal>Seed</p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:10'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CC30</p>
+  <td class=boxes2>
+  <p class=MsoNormal>C6C5</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Current map</p>
+  <td class=boxes>
+  <p class=MsoNormal>Select Seed Shooter seed </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>The current map the player is on</p>
+  <td class=boxes>
+  <p class=MsoNormal>Seed</p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:11'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CC2D</p>
+  <td class=boxes2>
+  <p class=MsoNormal>C6CC</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Current map group</p>
+  <td class=boxes>
+  <p class=MsoNormal>Level of ring box </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>The current map group the player is on</p>
+  <td class=boxes>
+  <p class=MsoNormal>Level</p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:12'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes2>
+  <p class=MsoNormal>CC29</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Buttons being pressed </p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>1 Bit for each button </p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:13'>
+  <td class=boxes2>
+  <p class=MsoNormal>CC2A</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>The buttons that have been pressed (only pressed) on the
+  current cycle</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>1 Bit for each button </p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:14'>
+  <td class=boxes2>
+  <p class=MsoNormal>CC2D</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Current map group</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>The current map group the player is on</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:15'>
+  <td class=boxes2>
+  <p class=MsoNormal>CC30</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Current map</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>The current map the player is on</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:16'>
+  <td class=boxes2>
+  <p class=MsoNormal>CC60</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Link's sprite cannot change direction (holding a charge)
+  if not 00</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>One byte</p>
+  </td>
+ </tr>
+  <tr style='mso-yfti-irow:17'>
+  <td class=boxes2>
+  <p class=MsoNormal>CC63</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Weapon action?</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>If FF, Link powerswings</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:18'>
+  <td class=boxes2>
+  <p class=MsoNormal>CC6C</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Pegasus effect timer</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Little-endian short extending into CC6D</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:19'>
+  <td class=boxes2>
+  <p class=MsoNormal>CC8F</p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Count of lit torches </p>
+  </td>
+  <td class=boxes>
+  <p class=MsoNormal>Count</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:20'>
+  <td class=boxes2>
   <p class=MsoNormal>CCA0</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>Triggers currently pressed </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>1 Bit for each trigger, or trigger index (Trigger ID:
   09*x, x) </p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:13'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CC60</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Link's sprite cannot change direction (holding a charge)
-  if not 00</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>One byte</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:14'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CC6C</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Pegasus effect timer</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Little-endian short extending into CC6D</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:15'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CC63</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Weapon action?</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>If FF, Link powerswings</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:16'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>CC8F</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Count of lit torches </p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Count</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:17'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+ <tr style='mso-yfti-irow:21'>
+  <td class=boxes2>
   <p class=MsoNormal>CCAB</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>How long the wall lever is pulled out </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>Bit 7 set if pulled out all the way (clicked), rest is
   relative length </p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:18'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>C6AA</p>
+  <tr style='mso-yfti-irow:22'>
+  <td class=boxes2>
+  <p class=MsoNormal>CD02</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Current health</p>
+  <td class=boxes>
+  <p class=MsoNormal>Last map transition direction (00 = Up, 01 = Right, 02 =
+  Down, 03 = Left) </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>00 = Dead, 40 = Full </p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:19'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>C6AB</p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>Max health </p>
-  </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
-  <p class=MsoNormal>00 = Dead, 40 = Full </p>
+  <td class=boxes>
+  <p class=MsoNormal>Map transition </p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:20'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+ <tr style='mso-yfti-irow:23'>
+  <td class=boxes2>
   <p class=MsoNormal>D00B</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>Link's Y position.</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>The absolute position.</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:21'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+ <tr style='mso-yfti-irow:24'>
+  <td class=boxes2>
   <p class=MsoNormal>D00D</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>Link's X position.</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>The absolute position.</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:22;mso-yfti-lastrow:yes'>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+ <tr style='mso-yfti-irow:25;mso-yfti-lastrow:yes'>
+  <td class=boxes2>
   <p class=MsoNormal>D029</p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>Damage being dealt to Link </p>
   </td>
-  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <td class=boxes>
   <p class=MsoNormal>If &gt;= 80, decrease while &lt; FF (For example, FD deals
   2)</p>
   </td>
@@ -2683,15 +2790,78 @@ Addresses</span></span></span></p>
 </table>
 
 </blockquote>
+<br />
 
-<p><span id=credits><span class=style51><span style='font-size:13.5pt'>Credits</span></span></span></p>
+<h3 class=centered><span id=sampleexamples><span class=style51><span style='font-size:13.5pt'>Example Scripts</span></span></span></h3>
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+<p>Here are some examples of scripts which can be made along with how they are written in ZOSE. 
+Keep in mind that these are examples and that after experimenting a bit after you understand what
+the above scripts do you can write some really interesting scripts.<br /><br />
+Eg 1 (Spawn an item):</p>
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+<p class=style14 style='background:whitesmoke'><span class=style151>writelocation 100002</span>
+<em><span style='font-family:"Courier New"'>(Address location 100002 is free space and the script will be stored at that STARTING address.)</span></em><br>
+<span class=style151>setinteraction72 00</span> <em><span style='font-family:"Courier New"'>(The hex value 00 is the 2nd part of the id for a type 2 interaction. Eg: 7200)</span></em><br><br>
+<span class=style151>checkitemflag</span>
+<em><span style='font-family:"Courier New"'>(Check the item flag for the current room. If NOT set it will continue with script else it will stop.)</span></em><br />
+<span class=style151>spawnitem 28 0C</span>
+<em><span style='font-family:"Courier New"'>(Spawns an item at Interactions YX location with the ID 280C. (A once collectable 30 rupee))<span></em>
+</p>
+</blockquote>
+<p>This script checks if the item flag for the room is set and if so stops the script, else it allows it to continue and spawn an item with a specified ID value.</p>
+<br />
+<p>Eg 2 (Multiple switches trigger door opening):</p>
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+<p class=style14 style='background:whitesmoke'><span class=style151>writelocation 100008</span>
+<em><span style='font-family:"Courier New"'>(Address location 100008 is the next free space after the previous script.)</span></em><br>
+<span class=style151>setinteraction72 01</span> <em><span style='font-family:"Courier New"'>(We now have one script ID already used so now we need to use another. In this case the next numerical ID is 7201.)</span></em><br><br>
+<span class=style151>checkmemory CCA0 7</span>
+<em><span style='font-family:"Courier New"'>(Reads memory value from RAM address CCA0 and waits until it is a value of 7.)</span></em><br />
+<span class=style151>setmemory CCA0 40</span>
+<em><span style='font-family:"Courier New"'>(Sets a memory value of 40 to RAM address CCA0.)<span></em>
+</p>
+</blockquote>
+<p>This script check the memory location which stores which switches are pressed and then writes a new value to that location to open the doors. Each bit of CCA0 represents a switch ID. In this script once 3 
+switches have been pushes setting bits 0-2 all to 1 and resulting in CCA0 having a value of 7 it will then set it with a value of 40 which effectively wipes bits 0-2 and sets bit 6.</p>
+<br />
+<p>Eg 3 (Light two torches for chest):</p>
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+<p class=style14 style='background:whitesmoke'><span class=style151>writelocation 100012</span>
+<em><span style='font-family:"Courier New"'>(Address location 100012 is the next free space after the previous script.)</span></em><br>
+<span class=style151>setinteraction72 02</span> <em><span style='font-family:"Courier New"'>(You get the idea, increment ID by 1 for next script.)</span></em><br><br>
+<span class=style151>maketorcheslightable</span>
+<em><span style='font-family:"Courier New"'>(Calls an assembly script to allow lighting and monitoring of torches. Equivalent to: asm15 4f4b)</span></em><br />
+<span class=style151>checkmemory CC8F 2</span>
+<em><span style='font-family:"Courier New"'>(Reads memory value from RAM address CC8F and waits until it is a value of 2.)<span></em><br />
+<span class=style151>checkitemflag</span>
+<em><span style='font-family:"Courier New"'>(Checks item flag in current room.)<span></em><br />
+<span class=style151>playsound 4D</span>
+<em><span style='font-family:"Courier New"'>(Plays a sound effect of specified value. (Puzzle solved SFX))<span></em><br />
+<span class=style151>createpuff</span>
+<em><span style='font-family:"Courier New"'>(Creates a puff at the interaction's location.)<span></em><br />
+<span class=style151>setdelay6</span>
+<em><span style='font-family:"Courier New"'>(Delays the script from progressing.)<span></em><br />
+<span class=style151>settile F1</span>
+<em><span style='font-family:"Courier New"'>(Sets the tile F1 at the interaction's location. (Closed chest tile))<span></em><br />
+<span class=style151>setstate FF</span>
+<em><span style='font-family:"Courier New"'>(Writes a memory value of FF to the interaction for its state.)<span></em>
+</p>
+</blockquote>
+<p>This script makes torches lightable with ember seeds, checks the memory location which keeps track of the number of lit torches (address CC8F) then if the item flag is not set proceeds to emulate the effect of a chest 
+spawning in at the entities location.</p>
+</blockquote>
+<br />
+
+<h3 class=centered><span id=credits><span class=style51><span style='font-size:13.5pt'>Credits</span></span></span></h3>
 
 <blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
 
 <p>ZOSE created by Lin. Guide written by Lin. Thanks to Jigglysaint for guiding
 me in the direction of the game's scripting engine, providing a list of some
 opcodes, and helping where help was needed. Also thanks to him for an idea that
-massively improved ZOSE. </p>
+massively improved ZOSE. Drenn for extending ZOSE opcode list and to clarify 
+previous ones. Luigi for formatting and clearing up the HTML of the page, as well
+as adding extra examples.</p>
 
 </blockquote>
 
