@@ -12,6 +12,8 @@ namespace ZOSE
 {
     public partial class Form1 : Form
     {
+        const string Title = "ZOSE - Zelda Oracles Script Editor (Drenn's Beta)";
+
         Compiler compiler;
         GBFile gb;
         string filename = "";
@@ -64,7 +66,7 @@ namespace ZOSE
                 sw.Write(textBox1.Text);
                 sw.Close();
                 saved = true;
-                this.Text = "ZOSE - Zelda Oracles Script Editor";
+                this.Text = Title;
                 return DialogResult.Yes;
             }
             catch (IOException ex)
@@ -187,7 +189,10 @@ namespace ZOSE
 
         public void WriteASMScript()
         {
-            this.gb.WriteBytes(0x30000, ZOSE.Properties.Resources.bankc);
+            // Uncommenting this line will write an unmodified version of bank C before applying the
+            // rest of the patches. Was this necessary to delete certain patches from older versions?
+//             this.gb.WriteBytes(0x30000, ZOSE.Properties.Resources.bankc);
+
             this.gb.WriteBytes(0x20, new byte[0x1a]);
             this.gb.WriteBytes(0x2be09, new byte[] {
                     30, 70, 0x1a, 0xfe, 0, 0x20, 0x24, 30, 0x42, 0x21, 0, 0x40, 0x1a, 6, 0, 0x4f,
@@ -357,7 +362,7 @@ namespace ZOSE
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             saved = false;
-            this.Text = "ZOSE - Zelda Oracles Script Editor*";
+            this.Text = Title + "*";
             PerformIntellisenseCheck(true);
         }
 
@@ -366,7 +371,7 @@ namespace ZOSE
             if (!lstIntellisense.Visible || textBox1.SelectionLength > 0)
                 return;
             saved = false;
-            this.Text = "ZOSE - Zelda Oracles Script Editor*";
+            this.Text = Title + "*";
             if (e.KeyChar == (char)Keys.Space || e.KeyChar == (char)Keys.Enter)
             {
                 e.Handled = true;
@@ -615,7 +620,7 @@ namespace ZOSE
                 sr.Close();
                 scriptFilename = o.FileName;
                 saved = true;
-                this.Text = "ZOSE - Zelda Oracles Script Editor";
+                this.Text = Title;
             }
             catch (IOException ex)
             {
@@ -657,7 +662,7 @@ namespace ZOSE
             scriptFilename = "";
             textBox1.Text = "";
             saved = true;
-            this.Text = "ZOSE - Zelda Oracles Script Editor";
+            this.Text = Title;
         }
 
         private void decompile72InteractionToolStripMenuItem_Click(object sender, EventArgs e)
