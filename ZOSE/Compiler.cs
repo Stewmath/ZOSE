@@ -52,7 +52,7 @@ namespace ZOSE
             "jumptable_memoryaddress",
             "setcoords",
             "set49",
-            "setmovingdirection",
+            "setangle",
             "turntofacelink",
             "setspeed",
             "checkcounter2iszero",
@@ -72,7 +72,7 @@ namespace ZOSE
             "addinteractionbyte",
             "setzspeed",
             "set49extra",
-            "setmovingdirectionandanimation",
+            "setangleandanimation",
             "settextidjp",
             "rungenericnpc",
             "rungenericnpclowindex",
@@ -520,7 +520,7 @@ namespace ZOSE
                     break;
 
                 case "set49": //89
-                case "setmovingdirection":
+                case "setangle":
                     if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
@@ -672,7 +672,7 @@ namespace ZOSE
                     break;
 
                 case "set49extra": //96
-                case "setmovingdirectionandanimation":
+                case "setangleandanimation":
                     if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
