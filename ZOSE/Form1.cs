@@ -12,7 +12,7 @@ namespace ZOSE
 {
     public partial class Form1 : Form
     {
-        const string Title = "ZOSE - Zelda Oracles Script Editor (Drenn's Update v0.5)";
+        const string Title = "ZOSE - Zelda Oracles Script Editor (Drenn's Update v0.6)";
 
         Compiler compiler;
         GBFile gb;
