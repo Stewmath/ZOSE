@@ -48,7 +48,7 @@
             this.nAddress.Hexadecimal = true;
             this.nAddress.Location = new System.Drawing.Point(66, 12);
             this.nAddress.Maximum = new decimal(new int[] {
-            2097151,
+            0x3fffff,
             0,
             0,
             0});
