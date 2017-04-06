@@ -1420,27 +1420,43 @@ namespace ZOSE
                     break;
 
                 case "movenpcup": //EC
-                    if (args.Length != 1)
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
                         return false;
                     output.WriteByte(0xEC);
+                    output.WriteByte((byte)i);
                     break;
 
                 case "movenpcright": //ED
-                    if (args.Length != 1)
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
                         return false;
                     output.WriteByte(0xED);
+                    output.WriteByte((byte)i);
                     break;
 
                 case "movenpcdown": //EE
-                    if (args.Length != 1)
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
                         return false;
                     output.WriteByte(0xEE);
+                    output.WriteByte((byte)i);
                     break;
 
                 case "movenpcleft": //EF
-                    if (args.Length != 1)
+                    if (args.Length != 2)
+                        return false;
+                    i = ParseHex(args[1]);
+                    if (i == -1)
                         return false;
                     output.WriteByte(0xEF);
+                    output.WriteByte((byte)i);
                     break;
 
                 case "setdelay0": //F0
