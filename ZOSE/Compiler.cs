@@ -201,6 +201,23 @@ namespace ZOSE
             return null;
         }
 
+        void WriteWord(ushort word)
+        {
+            output.WriteByte((byte)word);
+            output.WriteByte((byte)(word >> 8));
+        }
+
+        void WriteWordBE(ushort word)
+        {
+            output.WriteByte((byte)(word >> 8));
+            output.WriteByte((byte)word);
+        }
+
+        void WriteByte(byte b)
+        {
+            output.WriteByte(b);
+        }
+
         public bool CompileLine(string line)
         {
             if (line == "" || line.StartsWith("//"))
@@ -230,23 +247,23 @@ namespace ZOSE
                 case "forceend":
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0);
+                    WriteByte(0);
                     break;
 
                 case "maketorcheslightable":
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xE0);
-                    output.WriteByte(0x4B);
-                    output.WriteByte(0x4F);
+                    WriteByte(0xE0);
+                    WriteByte(0x4B);
+                    WriteByte(0x4F);
                     break;
 
                 case "createpuffnodelay":
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xE0);
-                    output.WriteByte(0xC1);
-                    output.WriteByte(0x24);
+                    WriteByte(0xE0);
+                    WriteByte(0xC1);
+                    WriteByte(0x24);
                     break;
 
                 case "jumptilecheck":
@@ -257,14 +274,14 @@ namespace ZOSE
                     i = ParseHex(args[3]);
                     if (j == -1 || i == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xFD);
-                    output.WriteByte(0x02);
-                    output.WriteByte((byte)k);
-                    output.WriteByte(0xCF);
-                    output.WriteByte((byte)j);
-                    output.WriteByte((byte)(i / 0x4000));
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
+                    WriteByte(0xFD);
+                    WriteByte(0x02);
+                    WriteByte((byte)k);
+                    WriteByte(0xCF);
+                    WriteByte((byte)j);
+                    WriteByte((byte)(i / 0x4000));
+                    WriteByte((byte)i);
+                    WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
                     break;
 
                 case "checktile":
@@ -274,10 +291,10 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (j == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xD5);
-                    output.WriteByte((byte)k);
-                    output.WriteByte(0xCF);
-                    output.WriteByte((byte)j);
+                    WriteByte(0xD5);
+                    WriteByte((byte)k);
+                    WriteByte(0xCF);
+                    WriteByte((byte)j);
                     break;
 
                 case "setinteraction72":
@@ -298,11 +315,11 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xFD);
-                    output.WriteByte(0);
-                    output.WriteByte((byte)(i / 0x4000));
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
+                    WriteByte(0xFD);
+                    WriteByte(0);
+                    WriteByte((byte)(i / 0x4000));
+                    WriteByte((byte)i);
+                    WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -313,12 +330,12 @@ namespace ZOSE
                     i = ParseHex(args[2]);
                     if (j == -1 || i == -1)
                         return false;
-                    output.WriteByte(0xFD);
-                    output.WriteByte(1);
-                    output.WriteByte((byte)j);
-                    output.WriteByte((byte)(i / 0x4000));
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
+                    WriteByte(0xFD);
+                    WriteByte(1);
+                    WriteByte((byte)j);
+                    WriteByte((byte)(i / 0x4000));
+                    WriteByte((byte)i);
+                    WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
                     //scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -330,14 +347,14 @@ namespace ZOSE
                     i = ParseHex(args[3]);
                     if (j == -1 || i == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xFD);
-                    output.WriteByte(2);
-                    output.WriteByte((byte)k);
-                    output.WriteByte((byte)(k >> 8));
-                    output.WriteByte((byte)j);
-                    output.WriteByte((byte)(i / 0x4000));
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
+                    WriteByte(0xFD);
+                    WriteByte(2);
+                    WriteByte((byte)k);
+                    WriteByte((byte)(k >> 8));
+                    WriteByte((byte)j);
+                    WriteByte((byte)(i / 0x4000));
+                    WriteByte((byte)i);
+                    WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
                     //scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -350,14 +367,14 @@ namespace ZOSE
                     i = ParseHex(args[4]);
                     if (j == -1 || i == -1 || k == -1 || l == -1)
                         return false;
-                    output.WriteByte(0xFD);
-                    output.WriteByte(3);
-                    output.WriteByte((byte)k);
-                    output.WriteByte((byte)j);
-                    output.WriteByte((byte)l);
-                    output.WriteByte((byte)(i / 0x4000));
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
+                    WriteByte(0xFD);
+                    WriteByte(3);
+                    WriteByte((byte)k);
+                    WriteByte((byte)j);
+                    WriteByte((byte)l);
+                    WriteByte((byte)(i / 0x4000));
+                    WriteByte((byte)i);
+                    WriteByte((byte)((i % 0x4000 >> 8) + 0x40));
                     break;
 
                 case "unsetroomflag": //FD 04
@@ -370,11 +387,11 @@ namespace ZOSE
                         return false;
                     i &= 0xFF;
                     byte b = (byte)(~(1 << i));
-                    output.WriteByte(0xFD);
-                    output.WriteByte(0x04);
-                    output.WriteByte(b);
-                    output.WriteByte((byte)j);
-                    output.WriteByte((byte)k);
+                    WriteByte(0xFD);
+                    WriteByte(0x04);
+                    WriteByte(b);
+                    WriteByte((byte)j);
+                    WriteByte((byte)k);
                     break;
 
                 case ".db":
@@ -386,7 +403,7 @@ namespace ZOSE
                         j = ParseHex(args[i]);
                         if (j == -1)
                             return false;
-                        output.WriteByte((byte)j);
+                        WriteByte((byte)j);
                         i++;
                     }
                     break;
@@ -400,7 +417,7 @@ namespace ZOSE
                         j = ParseHex(args[i]);
                         if (j == -1)
                             return false;
-                        output.WriteWord((ushort)j);
+                        WriteWord((ushort)j);
                         i++;
                     }
                     break;
@@ -411,8 +428,8 @@ namespace ZOSE
                     if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
-                    output.WriteByte((byte)(i >> 8));
-                    output.WriteByte((byte)i);
+                    WriteByte((byte)(i >> 8));
+                    WriteByte((byte)i);
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -423,8 +440,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x80);
-                    output.WriteByte((byte)i);
+                    WriteByte(0x80);
+                    WriteByte((byte)i);
                     break;
 
                 case "set45": // 81
@@ -434,8 +451,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x81);
-                    output.WriteByte((byte)i);
+                    WriteByte(0x81);
+                    WriteByte((byte)i);
                     break;
 
                 //no 82
@@ -447,9 +464,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0x83);
-                    output.WriteWord((ushort)i);
-                    output.WriteByte((byte)j);
+                    WriteByte(0x83);
+                    WriteWord((ushort)i);
+                    WriteByte((byte)j);
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -463,11 +480,11 @@ namespace ZOSE
                     l = ParseHex(args[4]);
                     if (i == -1 || j == -1 || k == -1 || l == -1)
                         return false;
-                    output.WriteByte(0x84);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
-                    output.WriteByte((byte)k);
-                    output.WriteByte((byte)l);
+                    WriteByte(0x84);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
+                    WriteByte((byte)k);
+                    WriteByte((byte)l);
                     break;
 
                 case "spawnenemy": //85
@@ -479,11 +496,11 @@ namespace ZOSE
                     l = ParseHex(args[4]);
                     if (i == -1 || j == -1 || k == -1 || l == -1)
                         return false;
-                    output.WriteByte(0x85);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
-                    output.WriteByte((byte)k);
-                    output.WriteByte((byte)l);
+                    WriteByte(0x85);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
+                    WriteByte((byte)k);
+                    WriteByte((byte)l);
                     break;
 
                 case "showpasswordscreen": //86
@@ -492,8 +509,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x86);
-                    output.WriteByte((byte)i);
+                    WriteByte(0x86);
+                    WriteByte((byte)i);
                     break;
 
                 case "loadrel": //87
@@ -503,8 +520,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x87);
-                    output.WriteWord((ushort)i);
+                    WriteByte(0x87);
+                    WriteWord((ushort)i);
                     break;
 
                 case "setcoords": //88
@@ -514,9 +531,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0x88);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
+                    WriteByte(0x88);
+                    WriteByte((byte)i); //yy
+                    WriteByte((byte)j); //xx
                     break;
 
                 case "set49": //89
@@ -526,14 +543,14 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x89);
-                    output.WriteByte((byte)i);
+                    WriteByte(0x89);
+                    WriteByte((byte)i);
                     break;
 
                 case "turntofacelink": // 8a
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0x8a);
+                    WriteByte(0x8a);
                     break;
 
                 case "setspeed": // 8b
@@ -542,20 +559,20 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x8b);
-                    output.WriteByte((byte)i);
+                    WriteByte(0x8b);
+                    WriteByte((byte)i);
                     break;
 
                 case "checkcounter2iszero": // 8c, d8
                     if (args.Length == 1) {
-                        output.WriteByte(0x8c);
+                        WriteByte(0x8c);
                     }
                     else if (args.Length == 2) {
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0xd8);
-                        output.WriteByte((byte)i);
+                        WriteByte(0xd8);
+                        WriteByte((byte)i);
                     }
                     else
                         return false;
@@ -569,9 +586,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0x8D);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
+                    WriteByte(0x8D);
+                    WriteByte((byte)i); //yy
+                    WriteByte((byte)j); //xx
                     break;
 
                 case "setinteractionfactor": //8E
@@ -582,9 +599,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0x8E);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
+                    WriteByte(0x8E);
+                    WriteByte((byte)i); //yy
+                    WriteByte((byte)j); //xx
                     break;
 
                 case "loadsprite": //8F
@@ -594,8 +611,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x8F);
-                    output.WriteByte((byte)i);
+                    WriteByte(0x8F);
+                    WriteByte((byte)i);
                     break;
 
                 case "checklinkxtoma": //90
@@ -605,8 +622,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x90);
-                    output.WriteByte((byte)i);
+                    WriteByte(0x90);
+                    WriteByte((byte)i);
                     break;
 
                 case "setmemory": //91
@@ -617,10 +634,10 @@ namespace ZOSE
                     k = ParseHex(args[2]);
                     if (i == -1 || k == -1)
                         return false;
-                    output.WriteByte(0x91);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)(i >> 8));
-                    output.WriteByte((byte)k);
+                    WriteByte(0x91);
+                    WriteByte((byte)i);
+                    WriteByte((byte)(i >> 8));
+                    WriteByte((byte)k);
                     break;
 
                 case "ormemory": //92
@@ -630,10 +647,10 @@ namespace ZOSE
                     k = ParseHex(args[2]);
                     if (i == -1 || k == -1)
                         return false;
-                    output.WriteByte(0x92);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)(i >> 8));
-                    output.WriteByte((byte)k);
+                    WriteByte(0x92);
+                    WriteByte((byte)i);
+                    WriteByte((byte)(i >> 8));
+                    WriteByte((byte)k);
                     break;
 
                 case "getrandombits": // 93
@@ -643,9 +660,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0x93);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
+                    WriteByte(0x93);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
                     break;
 
                 case "addsetinteractionfactor": //94
@@ -656,9 +673,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0x94);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteByte((byte)j); //xx
+                    WriteByte(0x94);
+                    WriteByte((byte)i); //yy
+                    WriteByte((byte)j); //xx
                     break;
 
                 case "setzspeed": // 95
@@ -667,8 +684,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x95);
-                    output.WriteWord((ushort)i); //yy
+                    WriteByte(0x95);
+                    WriteWord((ushort)i); //yy
                     break;
 
                 case "set49extra": //96
@@ -678,8 +695,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x96);
-                    output.WriteByte((byte)i);
+                    WriteByte(0x96);
+                    WriteByte((byte)i);
                     break;
 
                 case "settextidjp": //97
@@ -688,18 +705,18 @@ namespace ZOSE
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0x97);
-                        output.WriteByte((byte)(i>>8));
-                        output.WriteByte((byte)(i&0xff));
+                        WriteByte(0x97);
+                        WriteByte((byte)(i>>8));
+                        WriteByte((byte)(i&0xff));
                     }
                     else if (args.Length == 3) {
                         i = ParseHex(args[1]);
                         j = ParseHex(args[2]);
                         if (i == -1 || j == -1)
                             return false;
-                        output.WriteByte(0x97);
-                        output.WriteByte((byte)i); //yy
-                        output.WriteByte((byte)j); //xx
+                        WriteByte(0x97);
+                        WriteByte((byte)i); //yy
+                        WriteByte((byte)j); //xx
                     }
                     else
                         return false;
@@ -712,8 +729,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x97);
-                    output.WriteWord((byte)i);
+                    WriteByte(0x97);
+                    WriteWordBE((byte)i);
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -722,18 +739,18 @@ namespace ZOSE
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0x98);
-                        output.WriteByte((byte)(i>>8));
-                        output.WriteByte((byte)(i&0xff));
+                        WriteByte(0x98);
+                        WriteByte((byte)(i>>8));
+                        WriteByte((byte)(i&0xff));
                     }
                     else if (args.Length == 3) {
                         i = ParseHex(args[1]);
                         j = ParseHex(args[2]);
                         if (i == -1 || j == -1)
                             return false;
-                        output.WriteByte(0x98);
-                        output.WriteByte((byte)i); //yy
-                        output.WriteByte((byte)j); //xx
+                        WriteByte(0x98);
+                        WriteByte((byte)i); //yy
+                        WriteByte((byte)j); //xx
                     }
                     else
                         return false;
@@ -745,14 +762,14 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x98);
-                    output.WriteWord((byte)i);
+                    WriteByte(0x98);
+                    WriteWordBE((byte)i);
                     break;
 
                 case "checktext": //99
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0x99);
+                    WriteByte(0x99);
                     break;
 
                 case "showtextnonexitable": //9a
@@ -760,18 +777,18 @@ namespace ZOSE
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0x9a);
-                        output.WriteByte((byte)(i>>8));
-                        output.WriteByte((byte)(i&0xff));
+                        WriteByte(0x9a);
+                        WriteByte((byte)(i>>8));
+                        WriteByte((byte)(i&0xff));
                     }
                     else if (args.Length == 3) {
                         i = ParseHex(args[1]);
                         j = ParseHex(args[2]);
                         if (i == -1 || j == -1)
                             return false;
-                        output.WriteByte(0x9a);
-                        output.WriteByte((byte)i); //yy
-                        output.WriteByte((byte)j); //xx
+                        WriteByte(0x9a);
+                        WriteByte((byte)i); //yy
+                        WriteByte((byte)j); //xx
                     }
                     else
                         return false;
@@ -783,14 +800,14 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0x9a);
-                    output.WriteWord((byte)i);
+                    WriteByte(0x9a);
+                    WriteWordBE((byte)i);
                     break;
 
                 case "makeabuttonsensitive": // 9b
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0x9b);
+                    WriteByte(0x9b);
                     break;
 
                 case "settextid": //9C
@@ -798,17 +815,17 @@ namespace ZOSE
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0x9C);
-                        output.WriteWord((ushort)i); //yy
+                        WriteByte(0x9C);
+                        WriteWord((ushort)i); //yy
                     }
                     else if (args.Length == 3) {
                         i = ParseHex(args[1]);
                         j = ParseHex(args[2]);
                         if (i == -1 || j == -1)
                             return false;
-                        output.WriteByte(0x9C);
-                        output.WriteByte((byte)i); //yy
-                        output.WriteByte((byte)j); //xx
+                        WriteByte(0x9C);
+                        WriteByte((byte)i); //yy
+                        WriteByte((byte)j); //xx
                     }
                     else
                         return false;
@@ -817,13 +834,13 @@ namespace ZOSE
                 case "showloadedtext": //9D
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0x9D);
+                    WriteByte(0x9D);
                     break;
 
                 case "checkabutton": //9E
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0x9E);
+                    WriteByte(0x9E);
                     break;
 
                 case "showtextdifferentforlinked": // 9F
@@ -834,10 +851,10 @@ namespace ZOSE
                     k = ParseHex(args[3]);
                     if (i == -1 || j == -1 || k == -1)
                         return false;
-                    output.WriteByte(0x9f);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
-                    output.WriteByte((byte)k);
+                    WriteByte(0x9f);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
+                    WriteByte((byte)k);
                     break;
 
                 case "checkcfc0bit": // a0-a7
@@ -846,7 +863,7 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1 || i >= 8)
                         return false;
-                    output.WriteByte((byte)(0xa0 | i));
+                    WriteByte((byte)(0xa0 | i));
                     break;
 
                 case "xorcfc0bit": // a8-af
@@ -855,7 +872,7 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1 || i >= 8)
                         return false;
-                    output.WriteByte((byte)(0xa8 | i));
+                    WriteByte((byte)(0xa8 | i));
                     break;
 
                 case "checkroomflag": //B0
@@ -866,9 +883,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0xB0);
-                    output.WriteByte((byte)i);
-                    output.WriteWord((ushort)j);
+                    WriteByte(0xB0);
+                    WriteByte((byte)i);
+                    WriteWord((ushort)j);
                     break;
 
                 case "setroomflag": //B1
@@ -878,8 +895,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xB1);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xB1);
+                    WriteByte((byte)i);
                     break;
 
                 // no b2
@@ -892,10 +909,10 @@ namespace ZOSE
                     k = ParseHex(args[3]);
                     if (i == -1 || j == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xB3);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
-                    output.WriteWord((ushort)k);
+                    WriteByte(0xB3);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
+                    WriteWord((ushort)k);
                     break;
 
                 case "writec6xx": // b4
@@ -905,9 +922,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0xB4);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
+                    WriteByte(0xB4);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
                     break;
 
                 case "jumpifglobalflagset": // b5
@@ -917,9 +934,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0xB5);
-                    output.WriteByte((byte)i);
-                    output.WriteWord((ushort)j);
+                    WriteByte(0xB5);
+                    WriteByte((byte)i);
+                    WriteWord((ushort)j);
                     break;
 
                 case "setglobalflag": //B6
@@ -928,8 +945,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1 || i >= 0x80)
                         return false;
-                    output.WriteByte(0xB6);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xB6);
+                    WriteByte((byte)i);
                     break;
 
                 case "unsetglobalflag": //B6
@@ -938,8 +955,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1 || i >= 0x80)
                         return false;
-                    output.WriteByte(0xB6);
-                    output.WriteByte((byte)(i | 0x80));
+                    WriteByte(0xB6);
+                    WriteByte((byte)(i | 0x80));
                     break;
 
                 // no b7
@@ -947,43 +964,43 @@ namespace ZOSE
                 case "setdisabledobjectsto91": //B8
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xB8);
+                    WriteByte(0xB8);
                     break;
 
                 case "setdisabledobjectsto00": //B9
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xB9);
+                    WriteByte(0xB9);
                     break;
 
                 case "setdisabledobjectsto11": //BA
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xBA);
+                    WriteByte(0xBA);
                     break;
 
                 case "disablemenu": //BB
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xBB);
+                    WriteByte(0xBB);
                     break;
 
                 case "enablemenu": //BC
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xBC);
+                    WriteByte(0xBC);
                     break;
 
                 case "disableinput": //BD
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xBD);
+                    WriteByte(0xBD);
                     break;
 
                 case "enableinput": //BE
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xBE);
+                    WriteByte(0xBE);
                     break;
 
                 // no bf
@@ -994,15 +1011,15 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xC0);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)(i >> 8));
+                    WriteByte(0xC0);
+                    WriteByte((byte)i);
+                    WriteByte((byte)(i >> 8));
                     break;
 
                 case "retscript": //C1
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xC1);
+                    WriteByte(0xC1);
                     break;
 
                 // no c2
@@ -1014,9 +1031,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0xC3);
-                    output.WriteByte((byte)i);
-                    output.WriteWord((ushort)j);
+                    WriteByte(0xC3);
+                    WriteByte((byte)i);
+                    WriteWord((ushort)j);
                     break;
 
                 case "jumpalways": // C4
@@ -1025,8 +1042,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xC4);
-                    output.WriteWord((ushort)i);
+                    WriteByte(0xC4);
+                    WriteWord((ushort)i);
                     break;
 
                 // no c5
@@ -1037,8 +1054,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xC6);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xC6);
+                    WriteByte((byte)i);
                     break;
 
                 case "jumpifmemoryset": // C7
@@ -1049,10 +1066,10 @@ namespace ZOSE
                     k = ParseHex(args[3]);
                     if (i == -1 || j == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xC7);
-                    output.WriteWord((ushort)i);
-                    output.WriteByte((byte)j);
-                    output.WriteWord((ushort)k);
+                    WriteByte(0xC7);
+                    WriteWord((ushort)i);
+                    WriteByte((byte)j);
+                    WriteWord((ushort)k);
                     break;
 
                 case "jumpiftradeitemeq": // C8
@@ -1062,9 +1079,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0xC8);
-                    output.WriteByte((byte)i);
-                    output.WriteWord((ushort)j);
+                    WriteByte(0xC8);
+                    WriteByte((byte)i);
+                    WriteWord((ushort)j);
                     break;
 
                 case "jumpifnoenemies": //C9
@@ -1073,8 +1090,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xC9);
-                    output.WriteWord((ushort)i);
+                    WriteByte(0xC9);
+                    WriteWord((ushort)i);
                     break;
 
                 case "jumpiflinkvariableneq": //CA
@@ -1085,10 +1102,10 @@ namespace ZOSE
                     k = ParseHex(args[3]);
                     if (i == -1 || j == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xCA);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
-                    output.WriteWord((ushort)k);
+                    WriteByte(0xCA);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
+                    WriteWord((ushort)k);
                     break;
 
                 case "jumpifmemoryeq": //CB
@@ -1099,10 +1116,10 @@ namespace ZOSE
                     k = ParseHex(args[3]);
                     if (i == -1 || j == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xCB);
-                    output.WriteWord((ushort)i);
-                    output.WriteByte((byte)j);
-                    output.WriteWord((ushort)k);
+                    WriteByte(0xCB);
+                    WriteWord((ushort)i);
+                    WriteByte((byte)j);
+                    WriteWord((ushort)k);
                     break;
 
                 case "jumpifinteractionbyteeq": //CC
@@ -1113,48 +1130,48 @@ namespace ZOSE
                     k = ParseHex(args[3]);
                     if (i == -1 || j == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xCC);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
-                    output.WriteWord((ushort)k);
+                    WriteByte(0xCC);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
+                    WriteWord((ushort)k);
                     break;
 
                 case "checkitemflag": //CD
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xCD);
+                    WriteByte(0xCD);
                     break;
 
                 case "checkroomflag40": //CE
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xCE);
+                    WriteByte(0xCE);
                     break;
 
                 case "checkspecialflag": //CF
                 case "checkroomflag80":
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xCF);
+                    WriteByte(0xCF);
                     break;
 
                 case "checkcollidedwithlink_onground": //D0
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xD0);
+                    WriteByte(0xD0);
                     break;
 
                 case "checkpalettefadedone": //D1
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xD1);
+                    WriteByte(0xD1);
                     break;
 
                 case "checkenemycount": //D2
                 case "checknoenemies":
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xD2);
+                    WriteByte(0xD2);
                     break;
 
                 case "checkmemorybit": //D3
@@ -1165,10 +1182,10 @@ namespace ZOSE
                     k = ParseHex(args[2]);
                     if (i == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xD3);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)k);
-                    output.WriteByte((byte)(k >> 8));
+                    WriteByte(0xD3);
+                    WriteByte((byte)i);
+                    WriteByte((byte)k);
+                    WriteByte((byte)(k >> 8));
                     break;
 
                 case "checkinteractionbyteeq": //D4
@@ -1178,9 +1195,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0xD4);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
+                    WriteByte(0xD4);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
                     break;
 
                 case "checkmemory": //D5
@@ -1191,16 +1208,16 @@ namespace ZOSE
                     k = ParseHex(args[1]);
                     if (i == -1 || k == -1)
                         return false;
-                    output.WriteByte(0xD5);
-                    output.WriteByte((byte)k);
-                    output.WriteByte((byte)(k >> 8));
-                    output.WriteByte((byte)i);
+                    WriteByte(0xD5);
+                    WriteByte((byte)k);
+                    WriteByte((byte)(k >> 8));
+                    WriteByte((byte)i);
                     break;
 
                 case "checknotcollidedwithlink_ignorez": //D6
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xD6);
+                    WriteByte(0xD6);
                     break;
 
                 case "setcounter1": //D7
@@ -1209,8 +1226,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xD7);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xD7);
+                    WriteByte((byte)i);
                     break;
 
                 // d8 implemented with the alternate checkcounter2iszero opcode
@@ -1218,19 +1235,19 @@ namespace ZOSE
                 case "checkheartdisplayupdated": //D9
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xD9);
+                    WriteByte(0xD9);
                     break;
 
                 case "checkrupeedisplayupdated": //DA
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xDA);
+                    WriteByte(0xDA);
                     break;
 
                 case "checkcollidedwithlink_ignorez": //DB
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xDB);
+                    WriteByte(0xDB);
                     break;
 
                 // no dc
@@ -1240,18 +1257,18 @@ namespace ZOSE
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0xDD);
-                        output.WriteByte((byte)(i>>8));
-                        output.WriteByte((byte)(i&0xff));
+                        WriteByte(0xDD);
+                        WriteByte((byte)(i>>8));
+                        WriteByte((byte)(i&0xff));
                     }
                     else if (args.Length == 3) {
                         i = ParseHex(args[1]);
                         j = ParseHex(args[2]);
                         if (i == -1 || j == -1)
                             return false;
-                        output.WriteByte(0xDD);
-                        output.WriteByte((byte)i); //yy
-                        output.WriteByte((byte)j); //xx
+                        WriteByte(0xDD);
+                        WriteByte((byte)i); //yy
+                        WriteByte((byte)j); //xx
                     }
                     else
                         return false;
@@ -1262,18 +1279,18 @@ namespace ZOSE
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0xDD);
-                        output.WriteByte((byte)(i>>8));
-                        output.WriteByte((byte)(i&0xff));
+                        WriteByte(0xDD);
+                        WriteByte((byte)(i>>8));
+                        WriteByte((byte)(i&0xff));
                     }
                     else if (args.Length == 3) {
                         i = ParseHex(args[1]);
                         j = ParseHex(args[2]);
                         if (i == -1 || j == -1)
                             return false;
-                        output.WriteByte(0xDD);
-                        output.WriteByte((byte)i); //yy
-                        output.WriteByte((byte)j); //xx
+                        WriteByte(0xDD);
+                        WriteByte((byte)i); //yy
+                        WriteByte((byte)j); //xx
                     }
                     else
                         return false;
@@ -1286,9 +1303,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0xDF);
-                    output.WriteByte((byte)i); //yy
-                    output.WriteWord((ushort)j); //xx
+                    WriteByte(0xDF);
+                    WriteByte((byte)i); //yy
+                    WriteWord((ushort)j); //xx
                     break;
 
                 case "asm15": //0xE0, 0xE1
@@ -1296,19 +1313,19 @@ namespace ZOSE
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0xE0);
-                        output.WriteByte((byte)i);
-                        output.WriteByte((byte)(i >> 8));
+                        WriteByte(0xE0);
+                        WriteByte((byte)i);
+                        WriteByte((byte)(i >> 8));
                     }
                     else if (args.Length == 3) {
                         i = ParseHex(args[1]);
                         j = ParseHex(args[2]);
                         if (i == -1 || j == -1)
                             return false;
-                        output.WriteByte(0xE1);
-                        output.WriteByte((byte)i);
-                        output.WriteByte((byte)(i >> 8));
-                        output.WriteByte((byte)(j));
+                        WriteByte(0xE1);
+                        WriteByte((byte)i);
+                        WriteByte((byte)(i >> 8));
+                        WriteByte((byte)(j));
                     }
                     else
                         return false;
@@ -1317,7 +1334,7 @@ namespace ZOSE
                 case "createpuff": //0xE2
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xE2);
+                    WriteByte(0xE2);
                     break;
 
                 case "playsound": //E3
@@ -1326,8 +1343,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xE3);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xE3);
+                    WriteByte((byte)i);
                     break;
 
                 case "setmusic": //E4
@@ -1336,8 +1353,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xE4);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xE4);
+                    WriteByte((byte)i);
                     break;
 
                 case "setcc8a": //E5
@@ -1347,8 +1364,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xE5);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xE5);
+                    WriteByte((byte)i);
                     break;
 
                 case "spawnenemyhere": //E6
@@ -1356,18 +1373,18 @@ namespace ZOSE
                         i = ParseHex(args[1]);
                         if (i == -1)
                             return false;
-                        output.WriteByte(0xE6);
-                        output.WriteByte((byte)(i>>8));
-                        output.WriteByte((byte)(i&0xff));
+                        WriteByte(0xE6);
+                        WriteByte((byte)(i>>8));
+                        WriteByte((byte)(i&0xff));
                     }
                     else if (args.Length == 3) {
                         i = ParseHex(args[1]);
                         k = ParseHex(args[2]);
                         if (i == -1 || k == -1)
                             return false;
-                        output.WriteByte(0xE6);
-                        output.WriteByte((byte)i);
-                        output.WriteByte((byte)k);
+                        WriteByte(0xE6);
+                        WriteByte((byte)i);
+                        WriteByte((byte)k);
                     }
                     else
                         return false;
@@ -1381,9 +1398,9 @@ namespace ZOSE
                     j = ParseHex(args[2]);
                     if (i == -1 || j == -1)
                         return false;
-                    output.WriteByte(0xE7);
-                    output.WriteByte((byte)i);
-                    output.WriteByte((byte)j);
+                    WriteByte(0xE7);
+                    WriteByte((byte)i);
+                    WriteByte((byte)j);
                     break;
 
                 case "settile": //E8
@@ -1393,14 +1410,14 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xE8);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xE8);
+                    WriteByte((byte)i);
                     break;
 
                 case "updatelinkrespawnposition":
                     if (args.Length != 1) //E9
                         return false;
-                    output.WriteByte(0xE9);
+                    WriteByte(0xE9);
                     break;
 
                 case "shakescreen": //EA
@@ -1409,14 +1426,14 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xEA);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xEA);
+                    WriteByte((byte)i);
                     break;
 
                 case "initcollisions": //EB
                     if (args.Length != 1)
                         return false;
-                    output.WriteByte(0xEB);
+                    WriteByte(0xEB);
                     break;
 
                 case "movenpcup": //EC
@@ -1425,8 +1442,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xEC);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xEC);
+                    WriteByte((byte)i);
                     break;
 
                 case "movenpcright": //ED
@@ -1435,8 +1452,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xED);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xED);
+                    WriteByte((byte)i);
                     break;
 
                 case "movenpcdown": //EE
@@ -1445,8 +1462,8 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xEE);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xEE);
+                    WriteByte((byte)i);
                     break;
 
                 case "movenpcleft": //EF
@@ -1455,60 +1472,60 @@ namespace ZOSE
                     i = ParseHex(args[1]);
                     if (i == -1)
                         return false;
-                    output.WriteByte(0xEF);
-                    output.WriteByte((byte)i);
+                    WriteByte(0xEF);
+                    WriteByte((byte)i);
                     break;
 
                 case "setdelay0": //F0
-                    output.WriteByte(0xF0);
+                    WriteByte(0xF0);
                     break;
 
                 case "setdelay1": //F1
-                    output.WriteByte(0xF1);
+                    WriteByte(0xF1);
                     break;
 
                 case "setdelay2": //F2
-                    output.WriteByte(0xF2);
+                    WriteByte(0xF2);
                     break;
 
                 case "setdelay3": //F3
-                    output.WriteByte(0xF3);
+                    WriteByte(0xF3);
                     break;
 
                 case "setdelay4": //F4
-                    output.WriteByte(0xF4);
+                    WriteByte(0xF4);
                     break;
 
                 case "setdelay5": //F5
-                    output.WriteByte(0xF5);
+                    WriteByte(0xF5);
                     break;
 
                 case "setdelay6": //F6
-                    output.WriteByte(0xF6);
+                    WriteByte(0xF6);
                     break;
 
                 case "setdelay7": //F7
-                    output.WriteByte(0xF7);
+                    WriteByte(0xF7);
                     break;
 
                 case "setdelay8": //F8
-                    output.WriteByte(0xF8);
+                    WriteByte(0xF8);
                     break;
 
                 case "setdelay9": //F9
-                    output.WriteByte(0xF9);
+                    WriteByte(0xF9);
                     break;
 
                 case "setdelay10": //FA
-                    output.WriteByte(0xFA);
+                    WriteByte(0xFA);
                     break;
 
                 case "setdelay11": //FB
-                    output.WriteByte(0xFB);
+                    WriteByte(0xFB);
                     break;
 
                 case "setdelay12": //FC
-                    output.WriteByte(0xFC);
+                    WriteByte(0xFC);
                     break;
 
                 default:
