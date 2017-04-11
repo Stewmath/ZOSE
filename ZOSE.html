@@ -599,7 +599,7 @@ second half of your interaction id)</span></em><br>
         <p class=MsoNormal>FF 02</p>
       </td>
       <td class=boxes>
-        <p class=MsoNormal>CheckTile</p>
+        <p class=MsoNormal>JumpTileCheck</p>
       </td>
       <td class=boxes>
         <p class=MsoNormal>Jumps if the tile at the location matches the specified
@@ -2401,7 +2401,8 @@ new aliases for old commands.
       <p class=MsoNormal>Moves an npc up for the given number of frames. The
       "SetSpeed" command should have been used prior to this.
       <p>You can do "MoveNpcUp 00" to just turn the npc in that direction.
-      <p>"SetSpeed 14; MoveNpcUp 21" will move the npc one tile.
+      <p>It seems that you need to add 1 to the actual amount you want. So, if you have a speed of
+      $14, and you want to move 1 tile ($20 frames of movement), you would do "MoveNPCUp 21".
     </td>
     <td class=boxes2>
       <p class=MsoNormal>1</p>
