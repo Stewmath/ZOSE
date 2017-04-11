@@ -741,7 +741,7 @@ namespace ZOSE
                     if (i == -1)
                         return false;
                     WriteByte(0x97);
-                    WriteWordBE((byte)i);
+                    WriteByte((byte)i);
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -774,7 +774,7 @@ namespace ZOSE
                     if (i == -1)
                         return false;
                     WriteByte(0x98);
-                    WriteWordBE((byte)i);
+                    WriteByte((byte)i);
                     break;
 
                 case "checktext": //99
@@ -812,7 +812,7 @@ namespace ZOSE
                     if (i == -1)
                         return false;
                     WriteByte(0x9a);
-                    WriteWordBE((byte)i);
+                    WriteByte((byte)i);
                     break;
 
                 case "makeabuttonsensitive": // 9b
