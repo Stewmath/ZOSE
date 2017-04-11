@@ -1,0 +1,18 @@
+ZOSE changelog
+
+v0.7.00:
+
+* Rewrote the ASM patches to allow all of the "jump" opcodes to be used in all
+contexts, and to be less intrusive in general.
+
+* Allow "jump" opcodes to take absolute addresses (same format as
+"writelocation" opcode)
+
+* Fixed the endianness of many opcodes, including:
+  * dw
+  * setzspeed
+  * showtext (when only 1 parameter passed)
+  * settextid
+  * 2-byte jump opcodes
+
+* Fixed "lowindex" text opcodes (not that anyone will use them anyway...)
