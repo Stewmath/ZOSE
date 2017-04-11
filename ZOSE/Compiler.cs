@@ -213,6 +213,17 @@ namespace ZOSE
             output.WriteByte((byte)word);
         }
 
+        ushort GetPointer(int address) {
+            if (address < 0x4000)
+                return (ushort)address;
+            else
+                return (ushort)((address&0x3fff) + 0x4000);
+        }
+        void WritePointer(int ptr)
+        {
+            WriteWord(GetPointer(ptr));
+        }
+
         void WriteByte(byte b)
         {
             output.WriteByte(b);
@@ -428,8 +439,9 @@ namespace ZOSE
                     if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
-                    WriteByte((byte)(i >> 8));
-                    WriteByte((byte)i);
+                    i = GetPointer(i);
+                    WriteByte((byte)(i>>8));
+                    WriteByte((byte)(i&0xff));
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -458,15 +470,14 @@ namespace ZOSE
                 //no 82
 
                 case "loadscript": //83
-                    if (args.Length != 3)
+                    if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
-                    j = ParseHex(args[2]);
-                    if (i == -1 || j == -1)
+                    if (i == -1)
                         return false;
                     WriteByte(0x83);
-                    WriteWord((ushort)i);
-                    WriteByte((byte)j);
+                    WriteByte((byte)(i/0x4000));
+                    WritePointer(i);
                     scripts[currentWriteIndex].endwith0 = false;
                     break;
 
@@ -885,7 +896,7 @@ namespace ZOSE
                         return false;
                     WriteByte(0xB0);
                     WriteByte((byte)i);
-                    WriteWord((ushort)j);
+                    WritePointer(j);
                     break;
 
                 case "setroomflag": //B1
@@ -912,7 +923,7 @@ namespace ZOSE
                     WriteByte(0xB3);
                     WriteByte((byte)i);
                     WriteByte((byte)j);
-                    WriteWord((ushort)k);
+                    WritePointer(k);
                     break;
 
                 case "writec6xx": // b4
@@ -936,7 +947,7 @@ namespace ZOSE
                         return false;
                     WriteByte(0xB5);
                     WriteByte((byte)i);
-                    WriteWord((ushort)j);
+                    WritePointer(j);
                     break;
 
                 case "setglobalflag": //B6
@@ -1033,7 +1044,7 @@ namespace ZOSE
                         return false;
                     WriteByte(0xC3);
                     WriteByte((byte)i);
-                    WriteWord((ushort)j);
+                    WritePointer(j);
                     break;
 
                 case "jumpalways": // C4
@@ -1043,7 +1054,7 @@ namespace ZOSE
                     if (i == -1)
                         return false;
                     WriteByte(0xC4);
-                    WriteWord((ushort)i);
+                    WritePointer(i);
                     break;
 
                 // no c5
@@ -1069,7 +1080,7 @@ namespace ZOSE
                     WriteByte(0xC7);
                     WriteWord((ushort)i);
                     WriteByte((byte)j);
-                    WriteWord((ushort)k);
+                    WritePointer(k);
                     break;
 
                 case "jumpiftradeitemeq": // C8
@@ -1081,7 +1092,7 @@ namespace ZOSE
                         return false;
                     WriteByte(0xC8);
                     WriteByte((byte)i);
-                    WriteWord((ushort)j);
+                    WritePointer(j);
                     break;
 
                 case "jumpifnoenemies": //C9
@@ -1091,7 +1102,7 @@ namespace ZOSE
                     if (i == -1)
                         return false;
                     WriteByte(0xC9);
-                    WriteWord((ushort)i);
+                    WritePointer(i);
                     break;
 
                 case "jumpiflinkvariableneq": //CA
@@ -1105,7 +1116,7 @@ namespace ZOSE
                     WriteByte(0xCA);
                     WriteByte((byte)i);
                     WriteByte((byte)j);
-                    WriteWord((ushort)k);
+                    WritePointer(k);
                     break;
 
                 case "jumpifmemoryeq": //CB
@@ -1119,7 +1130,7 @@ namespace ZOSE
                     WriteByte(0xCB);
                     WriteWord((ushort)i);
                     WriteByte((byte)j);
-                    WriteWord((ushort)k);
+                    WritePointer(k);
                     break;
 
                 case "jumpifinteractionbyteeq": //CC
@@ -1133,7 +1144,7 @@ namespace ZOSE
                     WriteByte(0xCC);
                     WriteByte((byte)i);
                     WriteByte((byte)j);
-                    WriteWord((ushort)k);
+                    WritePointer(k);
                     break;
 
                 case "checkitemflag": //CD
@@ -1305,7 +1316,7 @@ namespace ZOSE
                         return false;
                     WriteByte(0xDF);
                     WriteByte((byte)i); //yy
-                    WriteWord((ushort)j); //xx
+                    WritePointer(j); //xx
                     break;
 
                 case "asm15": //0xE0, 0xE1
