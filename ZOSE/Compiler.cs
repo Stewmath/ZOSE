@@ -835,8 +835,8 @@ namespace ZOSE
                         if (i == -1 || j == -1)
                             return false;
                         WriteByte(0x9C);
-                        WriteByte((byte)i); //yy
                         WriteByte((byte)j); //xx
+                        WriteByte((byte)i); //yy
                     }
                     else
                         return false;
