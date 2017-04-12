@@ -3,10 +3,12 @@ ZOSE changelog
 v0.7.00:
 
 * Rewrote the ASM patches to allow all of the "jump" opcodes to be used in all
-contexts, and to be less intrusive in general.
+contexts, and to be less intrusive in general. If you previously used an older
+ZOSE version, you will need to click "Re-apply ASM patches" for this to take
+effect.
 
-* Allow "jump" opcodes to take absolute addresses (same format as
-"writelocation" opcode)
+* Allow "jump" opcodes to take absolute addresses (same format as the
+"writelocation" opcode).
 
 * Fixed the endianness of many opcodes, including:
   * dw
