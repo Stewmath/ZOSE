@@ -1,5 +1,12 @@
 ZOSE changelog
 
+v0.8.00:
+
+* Implemented labels; a line that is a word which ends with a colon is
+considered a label. Jump opcodes can use these labels instead of hardcoded
+addresses.
+* Semicolons now work as comments.
+
 v0.7.00:
 
 * Rewrote the ASM patches to allow all of the "jump" opcodes to be used in all

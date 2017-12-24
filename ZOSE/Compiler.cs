@@ -21,6 +21,11 @@ namespace ZOSE
         GBHL.GBFile gb;
         public GBScript[] scripts;
         private int currentWriteIndex = -1;
+
+        private bool alwaysParseValidValue;
+        private Dictionary<String,int> labels = new Dictionary<String,int>();
+
+        // These two lists may be incomplete after adding the new opcodes
         List<int> jumps = new List<int>();
         public List<int> globalJumps;
 
@@ -180,27 +185,6 @@ namespace ZOSE
             gb = g;
         }
 
-        public Tuple<int,int> Compile(string text)
-        {
-            scripts = new GBScript[1024];
-            scripts[0] = new GBScript(1024);
-            currentWriteIndex = -1;
-            jumps = new List<int>();
-            if (text == "")
-                return null;
-            string[] linesOrig = text.Split('\n');
-            string[] lines = text.Replace("\r", "").Split('\n');
-            int charIndex=0;
-            int i=0;
-            foreach (string s in lines)
-            {
-                if (!CompileLine(s.Trim()))
-                    return new Tuple<int,int>(charIndex, s.Length);
-                charIndex += linesOrig[i++].Length + 1;
-            }
-            return null;
-        }
-
         void WriteWord(ushort word)
         {
             output.WriteByte((byte)word);
@@ -229,13 +213,82 @@ namespace ZOSE
             output.WriteByte(b);
         }
 
+        string removeComments(string line) {
+            int commentStart = line.IndexOf("//");
+            if (commentStart == -1 || (line.IndexOf(";") != -1 && line.IndexOf(";") < commentStart))
+                commentStart = line.IndexOf(";");
+            if (commentStart != -1)
+                line = line.Substring(0, commentStart);
+            return line.Trim();
+        }
+
+        public Tuple<int,int> Compile(string text)
+        {
+            scripts = new GBScript[1024];
+            scripts[0] = new GBScript(1024);
+            currentWriteIndex = -1;
+            jumps = new List<int>();
+            labels = new Dictionary<string,int>();
+
+            if (text == "")
+                return null;
+            string[] linesOrig = text.Split('\n');
+            string[] lines = text.Replace("\r", "").Split('\n');
+            
+            int charIndex=0;
+            int i=0;
+            alwaysParseValidValue = true; // Labels won't parse correctly; ignore for now
+
+            // First pass: find labels
+            foreach (string s in lines)
+            {
+                CompileLine(s.Trim());
+
+                string line = removeComments(s);
+                if (line.EndsWith(":")) {
+                    string label = line.Substring(0, line.Length-1);
+                    try {
+                        labels.Add(label, output.BufferLocation + scripts[currentWriteIndex].compileLocation);
+                    }
+                    catch(Exception) {
+                        return new Tuple<int,int>(charIndex, s.Length);
+                    }
+                }
+                charIndex += linesOrig[i++].Length + 1;
+            }
+
+            // Compile the script
+            scripts = new GBScript[1024];
+            scripts[0] = new GBScript(1024);
+            currentWriteIndex = -1;
+            jumps = new List<int>();
+            alwaysParseValidValue = false;
+
+            charIndex=0;
+            i=0;
+
+            foreach (string s in lines)
+            {
+                if (!CompileLine(s.Trim()))
+                    return new Tuple<int,int>(charIndex, s.Length);
+                charIndex += linesOrig[i++].Length + 1;
+            }
+            return null;
+        }
+
         public bool CompileLine(string line)
         {
-            if (line == "" || line.StartsWith("//"))
+            // Trim comment
+            line = removeComments(line);
+
+            if (line == "")
                 return true;
-            int index = line.IndexOf("//");
-            if (index > 0)
-                line = line.Substring(0, index - 1);
+
+            if (line.EndsWith(":")) {
+                // Label
+                return true;
+            }
+
             string[] args = line.Split(' ');
             args[0] = args[0].ToLower();
             if (currentWriteIndex == -1 && args[0] != "writelocation")
@@ -439,6 +492,8 @@ namespace ZOSE
                     if (args.Length != 2)
                         return false;
                     i = ParseHex(args[1]);
+                    if (i == -1)
+                        return false;
                     i = GetPointer(i);
                     WriteByte((byte)(i>>8));
                     WriteByte((byte)(i&0xff));
@@ -1936,8 +1991,15 @@ namespace ZOSE
             }
             catch (Exception)
             {
-                return -1;
             }
+
+            int val;
+            if (labels.TryGetValue(text, out val))
+                return val;
+
+            if (alwaysParseValidValue)
+                return 0;
+            return -1;
         }
 
         public int CalculateStartAddress(int first, int second)
